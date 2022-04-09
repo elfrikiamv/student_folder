@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".TestActivity">
+
+    <Button
+        android:id="@+id/btn_signOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="cerrar seción" />
+
+    <ImageView
+        android:id="@+id/imageAvatar"
+        android:padding="2dp"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signOut"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="name"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAvatar" />
+<!---
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        app:fab_expandDirection="up"
+        app:fab_labelsPosition="left"
+        fab:fab_icon="@drawable/ic_note"
+        app:fab_labelStyle="@style/FloatStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="#FFFF"
+            app:fab_size="mini"
+            app:fab_icon="@drawable/ic_note"
+            app:fab_title="This is Icon-1"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="#FFFF"
+            app:fab_size="mini"
+            app:fab_icon="@drawable/ic_note"
+            app:fab_title="This is Icon-2"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="#FFFF"
+            app:fab_size="mini"
+            app:fab_icon="@drawable/ic_note"
+            app:fab_title="This is Icon-3"/>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    -->
+    <!---
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fabPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            app:menu_backgroundColor="@color/bg_fb"
+            app:menu_colorNormal="@color/invertidoC"
+            app:menu_colorPressed="@color/carbon"
+            app:menu_colorRipple="@color/carbon"
+            app:menu_fab_label="Menú"
+            app:menu_icon="@drawable/ic_web"
+            app:menu_labels_colorNormal="@color/bg_fb"
+            app:menu_labels_colorPressed="@color/carbon"
+            app:menu_labels_colorRipple="@color/carbon"
+            app:menu_labels_showShadow="true"
+            app:menu_labels_textColor="@color/white"
+            app:menu_shadowColor="@color/black"
+            app:menu_shadowRadius="1dp"
+            app:menu_shadowXOffset="1dp"
+            app:menu_shadowYOffset="1dp"
+            app:menu_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="clicSubMenu2"
+                android:src="@drawable/ic_add"
+                app:fab_colorNormal="@color/carbon"
+                app:fab_colorPressed="@color/carbon"
+                app:fab_colorRipple="@color/invertidoC"
+                app:fab_label="Sub Menú 2"
+                app:fab_shadowColor="@color/black"
+                app:fab_shadowRadius="1dp"
+                app:fab_shadowXOffset="1dp"
+                app:fab_shadowYOffset="1dp"
+                app:fab_showShadow="true" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="clicSubMenu1"
+                android:src="@drawable/ic_add"
+                app:fab_colorNormal="@color/carbon"
+                app:fab_colorPressed="@color/carbon"
+                app:fab_colorRipple="@color/invertidoC"
+                app:fab_label="Sub Menú 1"
+                app:fab_shadowColor="@color/black"
+                app:fab_shadowRadius="1dp"
+                app:fab_shadowXOffset="1dp"
+                app:fab_shadowYOffset="1dp"
+                app:fab_showShadow="true" />
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+    -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

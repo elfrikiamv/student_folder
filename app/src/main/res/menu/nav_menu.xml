@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:title="Inicio"
+            android:icon="@drawable/ic_homepage">
+        </item>
+
+        <item
+            android:id="@+id/nav_internal"
+            android:title="Almacenamiento Interno"
+            android:icon="@drawable/ic_folder">
+        </item>
+        <item
+            android:id="@+id/nav_card"
+            android:title="TEST"
+            android:icon="@drawable/ic_add">
+            <!--
+            android:title="Tarjeta SD"
+            android:icon="@drawable/ic_sd_card">
+            -->
+        </item>
+        <item
+            android:id="@+id/nav_note"
+            android:title="Mis Notas"
+            android:icon="@drawable/ic_note">
+        </item>
+        <item
+            android:id="@+id/nav_drive"
+            android:title="Mi Drive"
+            android:icon="@drawable/ic_drive">
+        </item>
+    </group>
+
+
+    <item android:title="Cuenta">
+        <menu>
+            <item android:id="@+id/nav_cuenta"
+                  android:title="Cerrar sesión"
+                  android:icon="@drawable/ic_sign_out">
+            </item>
+        </menu>
+    </item>
+
+</menu>

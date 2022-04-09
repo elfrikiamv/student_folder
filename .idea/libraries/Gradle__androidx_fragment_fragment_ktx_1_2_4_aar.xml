@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.fragment:fragment-ktx:1.2.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a21db89a07f6b213a73e660e702c071/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3e83e46dcc07cf2822af0c50e987db1f/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1a5bb4c50e544c8afdff4028ca7567ec/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/48a9be26c47bd477887534b162ac1c3c/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4116e07e9f09892c65f64f3f72507d4a/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/147ecc66667a8fb7aaa3c641ad9c4365/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0e87b221789b5496ee751cf1b402255a/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5e393ad5cf68c79a32019ccc2cf6cb9/transformed/fragment-ktx-1.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5e393ad5cf68c79a32019ccc2cf6cb9/transformed/fragment-ktx-1.2.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c5e393ad5cf68c79a32019ccc2cf6cb9/transformed/fragment-ktx-1.2.4/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment-ktx/1.2.4/1ffa885329ceba2ceb2bea1253d2ca32a0c95fa7/fragment-ktx-1.2.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

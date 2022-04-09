@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/friki/Desktop/22/student_folder/app/src/main/res/layout/activity_main.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/friki/Desktop/22/student_folder/app/src/main/res/layout/fragment_home.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/22/student_folder/app/src/main/res/layout/nav_header.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/friki/Desktop/22/student_folder/app/src/main/res/menu/nav_menu.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_about.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_android.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_back.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_calendar_24.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_delete.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_music.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_open.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_pdf.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_rename.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_share.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable-v24/ic_zip.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/custom_button_back.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/ic_add.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/ic_delete.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/ic_info.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_four.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_home_1.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_home_2.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_list.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_list_drive.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_list_home.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_one.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_three.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/item_two.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/drawable/splash_background.xml" value="0.3729166666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_accesos_directos.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_add_edit_note.xml" value="0.25" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_calendario.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_drive.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_folder.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_gtareas.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_inicio.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_login.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_main.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_note.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_note_detail.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_tareas.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/activity_test.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/file_container.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/fragment_card.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/fragment_catagorized.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/fragment_internal.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/lista_archivos.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/nav_header.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/note_cell.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/note_rv_item.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/option_dialog.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/layout/option_layout.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/menu/bottom_navigation.xml" value="0.209375" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/menu/nav_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/friki/Desktop/student_folder - Copy/student_folder/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/drawable-v24/bg_bordered.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/drawable-v24/ic_details.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/activity_login.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/activity_note_detail.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/file_container.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/fragment_Card.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/fragment_card.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/fragment_home.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/fragment_internal.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/nav_header.xml" value="0.22" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/option_dialog.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/layout/option_layout.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/menu/bottom_navigation.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/menu/nav_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder - java and kotlin login/app/src/main/res/xml/provider_path.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable-v24/bg_bordered.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/bg_label.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/custom_button_back.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_add.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_add_black.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_delete_f.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_details_f.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_dropdown.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_home.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_link_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_meet_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_pdf_d.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_pdf_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_rename_f.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_rtf_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_save_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_share_f.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_teamsV.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_teams_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_txt_d.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_txt_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_web.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/ic_zoom_v.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_four.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_home_1.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_home_2.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_one.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_three.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/item_two.xml" value="0.225" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/drawable/splash_background.xml" value="0.382051282051282" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_add_edit_note.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_drive.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_login.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_main.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_main2.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_meet.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_note.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_teams.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_test.xml" value="0.33" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_web.xml" value="0.3578125" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/activity_zoom.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/file_container.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_blank.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_card.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_catagorized.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_internal.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_web.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/fragment_webview.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/ic_web.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/nav_header.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/note_rv_item.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/option_dialog.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/layout/option_layout.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/menu/back_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/friki/Desktop/student_folder/student_folder/app/src/main/res/menu/nav_menu.xml" value="0.371875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

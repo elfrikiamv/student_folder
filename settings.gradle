@@ -1,0 +1,2 @@
+rootProject.name = "student_folder"
+include ':app'

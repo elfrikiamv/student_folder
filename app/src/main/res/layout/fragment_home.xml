@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linear_home"
+    android:background="@color/carbon"
+    android:orientation="vertical"
+    android:weightSum="3"
+    tools:context=".Fragments.HomeFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:id="@+id/header_a_d">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/linearImage"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_h_image"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                    </ImageView>
+
+                    <TextView
+                        android:text="Imagenes"
+                        android:textColor="@color/invertidoC"
+                        android:textAlignment="center"
+                        android:textStyle="italic"
+                        android:textSize="18sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearDocs"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_h_documents"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                    </ImageView>
+
+                    <TextView
+                        android:text="Documentos"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:textStyle="italic"
+                        android:textSize="18sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearDownloads"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_h_download"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                    </ImageView>
+
+                    <TextView
+                        android:text="Descargas"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:textStyle="italic"
+                        android:textSize="18sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/linea1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/invertidoC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_a_d">
+        </View>
+        <!---
+        <Button
+            android:id="@+id/btnDrive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Mi Drive" />
+
+
+        <Button
+            android:id="@+id/btnNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Mis Notas" />
+            -->
+        <!---
+        <Button
+            android:id="@+id/btnTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Test"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linea1"/>
+
+
+        <View
+            android:id="@+id/linea2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/moradis"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTest">
+        </View>
+        -->
+        <TextView
+            android:id="@+id/recientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mis archivos recientes:"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linea1">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_recents"
+            android:layout_width="match_parent"
+            android:layout_height="@+id/recientes"
+            android:layout_margin="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recientes">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fabPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            app:menu_backgroundColor="@color/bg_fb"
+            app:menu_colorNormal="@color/invertidoC"
+            app:menu_colorPressed="@color/carbon"
+            app:menu_colorRipple="@color/carbon"
+            app:menu_fab_label="Mis enlaces"
+            app:menu_icon="@drawable/ic_link_v"
+            app:menu_labels_colorNormal="@color/bg_fb"
+            app:menu_labels_colorPressed="@color/carbon"
+            app:menu_labels_colorRipple="@color/invertidoC"
+            app:menu_labels_showShadow="true"
+            app:menu_labels_textColor="@color/white"
+            app:menu_shadowColor="@color/black"
+            app:menu_shadowRadius="1dp"
+            app:menu_shadowXOffset="1dp"
+            app:menu_shadowYOffset="1dp"
+            app:menu_showShadow="true">
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_web_teams"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_teams_v"
+                app:fab_colorNormal="@color/glass"
+                app:fab_colorPressed="@color/carbon"
+                app:fab_colorRipple="@color/carbon"
+                app:fab_label="Microsoft Teams"
+                app:fab_shadowColor="@color/black"
+                app:fab_shadowRadius="1dp"
+                app:fab_shadowXOffset="1dp"
+                app:fab_shadowYOffset="1dp"
+                app:fab_showShadow="true" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_web_meet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_meet_v"
+                app:fab_colorNormal="@color/glass"
+                app:fab_colorPressed="@color/carbon"
+                app:fab_colorRipple="@color/carbon"
+                app:fab_label="Google Meet"
+                app:fab_shadowColor="@color/black"
+                app:fab_shadowRadius="1dp"
+                app:fab_shadowXOffset="1dp"
+                app:fab_shadowYOffset="1dp"
+                app:fab_showShadow="true" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menu_web_zoom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_zoom_v"
+                app:fab_colorNormal="@color/glass"
+                app:fab_colorPressed="@color/carbon"
+                app:fab_colorRipple="@color/carbon"
+                app:fab_label="Zoom"
+                app:fab_shadowColor="@color/black"
+                app:fab_shadowRadius="1dp"
+                app:fab_shadowXOffset="1dp"
+                app:fab_shadowYOffset="1dp"
+                app:fab_showShadow="true" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

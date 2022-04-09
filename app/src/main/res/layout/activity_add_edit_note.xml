@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/carbon"
+    tools:context=".AddEditNoteActivity">
+
+    <EditText
+        android:id="@+id/idEdtNoteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Presione para nombrar la nota"
+        android:textColor="@color/white"
+        android:textColorHint="@color/invertidoC" />
+
+    <EditText
+        android:id="@+id/idEdtNoteDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/idBtnAddUpdate"
+        android:layout_below="@id/idEdtNoteTitle"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start|top"
+        android:hint="Presione para escribir en la nota"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textColor="@color/white"
+        android:textColorHint="@color/invertidoC" />
+
+    <Button
+        android:id="@+id/idBtnAddUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/custom_button_back"
+        android:text="Button"
+        android:textAllCaps="false" />
+
+</RelativeLayout>
