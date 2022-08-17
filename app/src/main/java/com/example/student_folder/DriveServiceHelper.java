@@ -13,6 +13,7 @@ import com.google.api.client.http.ByteArrayContent;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,25 @@ public class DriveServiceHelper {
 
     public DriveServiceHelper(Drive driveService) {
         mDriveService = driveService;
+    }
+
+    /**
+     * upload file to drive.
+     */
+    public Task<String> updateFile() {
+        return Tasks.call(mExecutor, () -> {
+            File metadata = new File()
+                    .setParents(Collections.singletonList("root"))
+                    .setMimeType("text/plain")
+                    .setName("Subiendo archivo");
+
+            File googleFile = mDriveService.files().create(metadata).execute();
+            if (googleFile == null) {
+                throw new IOException("Null result when requesting file creation.");
+            }
+
+            return googleFile.getId();
+        });
     }
 
     /**

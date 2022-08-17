@@ -1,13 +1,16 @@
 package com.example.student_folder.Fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,6 +33,15 @@ import com.example.student_folder.FileAdapter;
 import com.example.student_folder.FileOpener;
 import com.example.student_folder.OnFileSelectedListener;
 import com.example.student_folder.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.Scope;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -40,14 +52,18 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 
-
 public class InternalFragment extends Fragment implements OnFileSelectedListener {
+    //api google drive
+    private DriveServiceHelper mDriveServiceHelper;
+    private static final String TAG = "InternalFragment";
+    private static final int REQUEST_CODE_SIGN_IN = 1;
+    //private static final int REQUEST_CODE_OPEN_DOCUMENT = 2;
 
-    DriveServiceHelper driveServiceHelper;
     private RecyclerView recyclerView;
     private FileAdapter fileAdapter;
     private List<File> fileList;
@@ -55,7 +71,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     private TextView tv_pathHolder;
     File storage;
     String data;
-    String[] items = {"Renombrar", "Borrar", "Enviar"};
+    String[] items = {"drive", "Renombrar", "Borrar", "Enviar"};
 
     View view;
 
@@ -82,8 +98,101 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
 
         runtimePermission();
 
+        //Peticion de inicio de sesión google
+        requestSignIn();
+
         return view;
+
     }
+
+    //----------> bloque de codigo para conectar con DriveServiceHelper.java
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_favorite:
+                Toast.makeText(getContext(), "Atras xd", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        switch (requestCode) {
+            case REQUEST_CODE_SIGN_IN:
+                if (resultCode == Activity.RESULT_OK && resultData != null) {
+                    handleSignInResult(resultData);
+                }
+                break;
+
+            /*case REQUEST_CODE_OPEN_DOCUMENT:
+                if (resultCode == Activity.RESULT_OK && resultData != null) {
+                    Uri uri = resultData.getData();
+                    if (uri != null) {
+                        openFileFromFilePicker(uri);
+                    }
+                }
+                break;*/
+        }
+
+        super.onActivityResult(requestCode, resultCode, resultData);
+    }
+
+    /**
+     * Starts a sign-in activity using {@link #REQUEST_CODE_SIGN_IN}.
+     */
+    private void requestSignIn() {
+        //Log.d(TAG, "Requesting sign-in");
+        Toast.makeText(getContext(), "Solicitud de inicio de sesión", Toast.LENGTH_SHORT).show();
+
+        GoogleSignInOptions signInOptions =
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .requestScopes(new Scope(DriveScopes.DRIVE_FILE))
+                        .build();
+        GoogleSignInClient client = GoogleSignIn.getClient(getContext(), signInOptions);
+
+        // The result of the sign-in Intent is handled in onActivityResult.
+        startActivityForResult(client.getSignInIntent(), REQUEST_CODE_SIGN_IN);
+    }
+
+    /**
+     * Handles the {@code result} of a completed sign-in activity initiated from {@link
+     * #requestSignIn()}.
+     */
+    private void handleSignInResult(Intent result) {
+        GoogleSignIn.getSignedInAccountFromIntent(result)
+                .addOnSuccessListener(googleAccount -> {
+                    //Log.d(TAG, "Signed in as " + googleAccount.getEmail());
+                    Toast.makeText(getContext(), "¡Hola " + googleAccount.getDisplayName() + "!", Toast.LENGTH_LONG).show();
+
+                    // Use the authenticated account to sign in to the Drive service.
+                    GoogleAccountCredential credential =
+                            GoogleAccountCredential.usingOAuth2(
+                                    getContext(), Collections.singleton(DriveScopes.DRIVE_FILE));
+                    credential.setSelectedAccount(googleAccount.getAccount());
+                    Drive googleDriveService =
+                            new Drive.Builder(
+                                    AndroidHttp.newCompatibleTransport(),
+                                    new GsonFactory(),
+                                    credential)
+                                    .setApplicationName("Drive API Migration")
+                                    .build();
+
+                    // The DriveServiceHelper encapsulates all REST API and SAF functionality.
+                    // Its instantiation is required before handling any onClick actions.
+                    mDriveServiceHelper = new DriveServiceHelper(googleDriveService);
+                })
+                .addOnFailureListener(exception -> Log.e(TAG, "Unable to sign in.", exception));
+    }
+    //<---------- bloque de codigo para conectar con DriveServiceHelper.java
+
 
     private void runtimePermission() {
 
@@ -169,6 +278,17 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedItem = adapterView.getItemAtPosition(i).toString();
                 switch (selectedItem) {
+
+                    case "drive":
+
+                        //run
+                        mDriveServiceHelper.updateFile();
+
+                        //closed optionDialog
+                        optionDialog.cancel();
+
+                        break;
+
                     case "Details":
                         AlertDialog.Builder detailDialog = new AlertDialog.Builder(getContext());
                         detailDialog.setTitle("Detalles: ");
@@ -358,6 +478,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     }
 
 
+
     /*
     private void requestSingIn() {
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -481,7 +602,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
             TextView txtOptions = myView.findViewById(R.id.txt0ption);
             ImageView imgOption = myView.findViewById(R.id.imgOption);
             txtOptions.setText(items[i]);
-            if (items[i].equals("Details")) {
+            if (items[i].equals("drive")) {
                 imgOption.setImageResource(R.drawable.ic_details_f);
             }
             else if (items[i].equals("Renombrar")) {
