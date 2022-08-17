@@ -71,7 +71,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     private TextView tv_pathHolder;
     File storage;
     String data;
-    String[] items = {"drive", "Renombrar", "Borrar", "Enviar"};
+    String[] items = {"Details", "drive", "Renombrar", "Borrar", "Enviar"};
 
     View view;
 
@@ -148,8 +148,8 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
      * Starts a sign-in activity using {@link #REQUEST_CODE_SIGN_IN}.
      */
     private void requestSignIn() {
-        //Log.d(TAG, "Requesting sign-in");
-        Toast.makeText(getContext(), "Solicitud de inicio de sesión", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Solicitud de inicio de sesión");
+        //Toast.makeText(getContext(), "Solicitud de inicio de sesión", Toast.LENGTH_SHORT).show();
 
         GoogleSignInOptions signInOptions =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -169,8 +169,8 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     private void handleSignInResult(Intent result) {
         GoogleSignIn.getSignedInAccountFromIntent(result)
                 .addOnSuccessListener(googleAccount -> {
-                    //Log.d(TAG, "Signed in as " + googleAccount.getEmail());
-                    Toast.makeText(getContext(), "¡Hola " + googleAccount.getDisplayName() + "!", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "Signed in as " + googleAccount.getEmail());
+                    //Toast.makeText(getContext(), "¡Hola " + googleAccount.getDisplayName() + "!", Toast.LENGTH_LONG).show();
 
                     // Use the authenticated account to sign in to the Drive service.
                     GoogleAccountCredential credential =
@@ -281,8 +281,8 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
 
                     case "drive":
 
-                        //run
-                        mDriveServiceHelper.updateFile();
+                        //run updateFile on the DriveServiceHelper con el parametro "file"
+                        mDriveServiceHelper.updateFile(file);
 
                         //closed optionDialog
                         optionDialog.cancel();

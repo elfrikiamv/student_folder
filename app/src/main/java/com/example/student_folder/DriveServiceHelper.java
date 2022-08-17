@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.util.Pair;
 
+import com.example.student_folder.Fragments.InternalFragment;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.ByteArrayContent;
+import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
@@ -30,6 +34,7 @@ import java.util.concurrent.Executors;
 public class DriveServiceHelper {
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
     private final Drive mDriveService;
+    private static final String TAG = "DriveServiceHelper";
 
     public DriveServiceHelper(Drive driveService) {
         mDriveService = driveService;
@@ -37,10 +42,35 @@ public class DriveServiceHelper {
 
     /**
      * upload file to drive.
+     * @param file
      */
-    public Task<String> updateFile() {
+    public Task<String> updateFile(java.io.File file) {
         return Tasks.call(mExecutor, () -> {
-            File metadata = new File()
+
+            // Upload file file.getName on drive.
+            File fileMetadata = new File();
+            fileMetadata.setName(file.getName());
+
+            // File's content.
+            java.io.File filePath = new java.io.File(file.getAbsolutePath());
+
+            // Specify media type and file-path for file.
+            FileContent mediaContent = new FileContent("text/plain", filePath);
+            try {
+                File googleFile = mDriveService.files().create(fileMetadata, mediaContent)
+                        .setFields("id")
+                        .execute();
+                Log.d(TAG, "File ID: " + googleFile.getId());
+                //System.out.println("File ID: " + file.getId());
+                return googleFile.getId();
+            } catch (GoogleJsonResponseException e) {
+                // TODO(developer) - handle error appropriately
+                Log.d(TAG, "Unable to upload file: " + e.getDetails());
+                //System.err.println("Unable to upload file: " + e.getDetails());
+                throw e;
+            }
+
+            /*File metadata = new File()
                     .setParents(Collections.singletonList("root"))
                     .setMimeType("text/plain")
                     .setName("Subiendo archivo");
@@ -50,7 +80,7 @@ public class DriveServiceHelper {
                 throw new IOException("Null result when requesting file creation.");
             }
 
-            return googleFile.getId();
+            return googleFile.getId();*/
         });
     }
 
