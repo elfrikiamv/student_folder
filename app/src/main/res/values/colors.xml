@@ -14,5 +14,10 @@
     <color name="glass">#00000000</color>
     <color name="bg_fb">#B0141414</color>
 
+    <color name="Primary">#771B69</color>
+    <color name="Secondary">#e492cb</color>
+    <color name="background">#1a1319</color>
+
+
 
 </resources>

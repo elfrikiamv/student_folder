@@ -17,6 +17,7 @@ buildscript {
         def nav_version = "2.3.5"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
 
+
         //classpath "de.timfreiheit.resourceplaceholders:placeholders:0.3"
 
         // NOTE: Do not place your application dependencies here; they belong

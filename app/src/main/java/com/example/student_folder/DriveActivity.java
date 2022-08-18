@@ -39,6 +39,11 @@ public class DriveActivity extends AppCompatActivity {
 
     private EditText mFileTitleEditText;
     private EditText mDocContentEditText;
+
+    //file list dirve
+    public EditText dFileList;
+    public EditText dNameFileList;
+
     FloatingActionMenu actionMenu;
     private DrawerLayout drawerLayout;
 
@@ -50,8 +55,8 @@ public class DriveActivity extends AppCompatActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         //nav
 
-        Toolbar toolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
+        /*Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);*/
 
 
 
@@ -71,17 +76,21 @@ public class DriveActivity extends AppCompatActivity {
         mFileTitleEditText = findViewById(R.id.file_title_edittext);
         mDocContentEditText = findViewById(R.id.doc_content_edittext);
 
+        //mostrar file list drive
+        dFileList = findViewById(R.id.tv_fileList);
+        dNameFileList = findViewById(R.id.tv_nameFileList);
+
         // Set the onClick listeners for the button bar.
-        //findViewById(R.id.open_btn).setOnClickListener(view -> openFilePicker());
+        /*findViewById(R.id.open_btn).setOnClickListener(view -> openFilePicker());
         findViewById(R.id.create_btn).setOnClickListener(view -> createFile());
         findViewById(R.id.menu_file_pdf).setOnClickListener(view -> saveFilePdf());
         findViewById(R.id.menu_file_txt).setOnClickListener(view -> saveFileTxt());
-        findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());
-        //findViewById(R.id.query_btn).setOnClickListener(view -> query());
+        findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());*/
+        findViewById(R.id.query_btn).setOnClickListener(view -> query());
 
         //floating menu
-        actionMenu = (FloatingActionMenu) findViewById(R.id.fabFile);
-        actionMenu.setClosedOnTouchOutside(true);
+        /*actionMenu = (FloatingActionMenu) findViewById(R.id.fabFile);
+        actionMenu.setClosedOnTouchOutside(true);*/
 
         // Authenticate the user. For most apps, this should be done when the user performs an
         // action that requires Drive access rather than in onCreate.
@@ -140,6 +149,7 @@ public class DriveActivity extends AppCompatActivity {
 
         // The result of the sign-in Intent is handled in onActivityResult.
         startActivityForResult(client.getSignInIntent(), REQUEST_CODE_SIGN_IN);
+
     }
 
     /**
@@ -315,13 +325,14 @@ public class DriveActivity extends AppCompatActivity {
                         }
                         String fileNames = builder.toString();
 
-                        mFileTitleEditText.setText("File List");
-                        mDocContentEditText.setText(fileNames);
+                        dFileList.setText("File List");
+                        dNameFileList.setText(fileNames);
 
                         setReadOnlyMode();
                     })
                     .addOnFailureListener(exception -> Log.e(TAG, "Unable to query files.", exception));
         }
+        return;
     }
 
     /**
