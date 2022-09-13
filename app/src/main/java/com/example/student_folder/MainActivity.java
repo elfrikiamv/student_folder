@@ -128,11 +128,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     CardFragment cardFragment = new CardFragment();
                     getSupportFragmentManager (). beginTransaction().replace (R.id.fragment_container, cardFragment).addToBackStack(null).commit();
                     break;
+                //al precionar el boton de cuenta
                 case R.id.nav_cuenta:
                     signOut();
                     //regresar a LoginActivity
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
+                    break;
+                    //al precionar el boton de configuracion
+                case R.id.nav_settings:
+                    //iniciar SettingsActivity
+                    startActivity(new Intent(this, SettingsActivity.class));
                     break;
                 case R.id.nav_note:
                     startActivity(new Intent(this, NoteActivity.class));

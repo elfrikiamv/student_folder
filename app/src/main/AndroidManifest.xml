@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Student_folder"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".WebActivitys.ZoomActivity"
             android:exported="false" />
         <activity
@@ -39,8 +42,8 @@
             android:exported="false" />
         <activity
             android:name=".DriveActivity"
-            android:label="Mi Drive"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Mi Drive" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -51,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -60,7 +63,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_path"/>
+                android:resource="@xml/provider_path" />
         </provider>
     </application>
 

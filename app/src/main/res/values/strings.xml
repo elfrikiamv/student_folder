@@ -5,4 +5,10 @@
 
     <string name="Open_Drawer">Cajón de navegación abierto</string>
     <string name="Close_Drawer">Cerrar el cajón de navegación</string>
+
+    <!--themeMode-->
+    <string name="themeMode">Modo oscuro</string>
+    <string name="themeModeDetalles">Habilita esta función si quieres poner el tema oscuro, de lo contrario estará el tema claro</string>
+
+    <string name="text">Este es un texto Este es un texto Este es un texto Este es un texto</string>
 </resources>

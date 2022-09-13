@@ -34,11 +34,15 @@
     </group>
 
 
-    <item android:title="Cuenta">
+    <item android:title="settings">
         <menu>
             <item android:id="@+id/nav_cuenta"
                   android:title="Cerrar sesión"
                   android:icon="@drawable/ic_sign_out">
+            </item>
+            <item android:id="@+id/nav_settings"
+                  android:title="Configuración"
+                  android:icon="@drawable/ic_settings">
             </item>
         </menu>
     </item>

@@ -1,6 +1,8 @@
 package com.example.student_folder;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,6 +24,10 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //------------->themeMode
+    SharedPreferences preferences = null;
+    //<-------------themeMode
+
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 100;
 
@@ -30,14 +37,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_login);
 
-         //fondiwis
+        //------------->themeMode
+        preferences = getSharedPreferences("night", Context.MODE_PRIVATE);
+        boolean booleanValue = preferences.getBoolean("night_mode",true);
+
+        if (booleanValue) {
+
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        //<-------------themeMode
+
+        //------------->fondiwis
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
         AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
 
         animationDrawable.setEnterFadeDuration(1500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-        //fondiwis
+        //<-------------fondiwis
 
         // Configure el inicio de sesión para solicitar el ID del usuario, la dirección de correo electrónico y
         // perfil. El ID y el perfil básico están incluidos en DEFAULT_SIGN_IN.
