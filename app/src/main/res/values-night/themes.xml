@@ -23,10 +23,29 @@
         <item name="android:background">@color/background</item>
     </style>
 
+    <!--text color dark-->
+    <style name="textHigh" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColor">@color/white_87</item>
+    </style>
+
+    <style name="textMedium" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColor">@color/white_60</item>
+    </style>
+
+    <style name="textDisabled" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColor">@color/white_38</item>
+    </style>
+
     <style name="text" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!--imgButton color dark-->
+    <style name="imgButton" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:backgroundTint">@color/white_87</item>
+    </style>
+
+    <!--button color dark-->
     <style name="button" parent="Theme.AppCompat.NoActionBar">
         <item name="android:background">@color/Primary</item>
         <item name="android:textColor">@color/white</item>

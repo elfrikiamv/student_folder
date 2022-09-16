@@ -11,8 +11,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
+            android:id="@+id/back_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="22dp"
+            android:background="@drawable/ic_back_btn">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <TextView
+            style="@style/textHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/settings">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="3dp"
         android:layout_marginHorizontal="22dp">
 
         <LinearLayout
@@ -21,7 +46,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/text"
+                style="@style/textHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
@@ -29,11 +54,12 @@
             </TextView>
 
             <TextView
-                style="@style/text"
+                style="@style/textMedium"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="@string/themeModeDetalles">
+                android:textSize="14dp"
+                android:text="@string/themeModeDesc">
             </TextView>
         </LinearLayout>
 
@@ -54,35 +80,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="13dp"
         android:layout_marginHorizontal="22dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
-                style="@style/text"
-                android:layout_width="wrap_content"
+                style="@style/textHigh"
+                android:id="@+id/tv_signOut"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tema">
+                android:textSize="16dp"
+                android:text="@string/signOut">
             </TextView>
 
             <TextView
-                style="@style/text"
+                style="@style/textMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tema">
+                android:layout_marginTop="3dp"
+                android:textSize="14dp"
+                android:text="@string/signOutDesc">
             </TextView>
-        </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        </Space>
     </LinearLayout>
 
     <!--<LinearLayout

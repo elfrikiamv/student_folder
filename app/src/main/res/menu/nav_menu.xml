@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item android:id="@+id/nav_home"
             android:title="Inicio"
             android:icon="@drawable/ic_homepage">
@@ -12,20 +13,19 @@
             android:title="Almacenamiento Interno"
             android:icon="@drawable/ic_folder">
         </item>
+
         <item
             android:id="@+id/nav_card"
-            android:title="TEST"
-            android:icon="@drawable/ic_add">
-            <!--
             android:title="Tarjeta SD"
             android:icon="@drawable/ic_sd_card">
-            -->
         </item>
+
         <item
             android:id="@+id/nav_note"
             android:title="Mis Notas"
             android:icon="@drawable/ic_note">
         </item>
+
         <item
             android:id="@+id/nav_drive"
             android:title="Mi Drive"
@@ -33,18 +33,14 @@
         </item>
     </group>
 
+    <item android:title="@string/more">
 
-    <item android:title="settings">
         <menu>
-            <item android:id="@+id/nav_cuenta"
-                  android:title="Cerrar sesión"
-                  android:icon="@drawable/ic_sign_out">
-            </item>
+
             <item android:id="@+id/nav_settings"
-                  android:title="Configuración"
+                  android:title="@string/settings"
                   android:icon="@drawable/ic_settings">
             </item>
         </menu>
     </item>
-
 </menu>

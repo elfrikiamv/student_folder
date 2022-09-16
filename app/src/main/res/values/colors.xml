@@ -18,6 +18,14 @@
     <color name="Primary">#771B69</color>
     <color name="Secondary">#e492cb</color>
     <color name="background">#1a1319</color>
+    <!--text color dark-->
+    <color name="white_87">#DEFFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_38">#61FFFFFF</color>
+    <!--text color light-->
+    <color name="black_87">#DE000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_38">#61000000</color>
 
 
 

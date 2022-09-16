@@ -29,15 +29,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    //Cuenta google
+    //------------->Cuenta google
     GoogleSignInClient mGoogleSignInClient;
+    //<-------------Cuenta google
     ImageView imageView;
     TextView name, email;
     //Button signout;
     //Cuenta google
     //menu flotanter¿
     //FloatingActionMenu actionMenu;
-
 
     private DrawerLayout drawerLayout;
 
@@ -61,13 +61,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager ().beginTransaction().replace(R.id.fragment_container, new HomeFragment ()).commit();
         navigationView.setCheckedItem(R.id.nav_home);
 
-        //Cuenta google
+        //------------->Cuenta google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+        //<-------------Cuenta google
 
         View headerView = navigationView.getHeaderView(0);
         TextView name = (TextView) headerView.findViewById(R.id.cuenta_name);
@@ -103,15 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     //signIn();
                 }
             });
-
         }
-
-
-
-
-
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -127,13 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_card:
                     CardFragment cardFragment = new CardFragment();
                     getSupportFragmentManager (). beginTransaction().replace (R.id.fragment_container, cardFragment).addToBackStack(null).commit();
-                    break;
-                //al precionar el boton de cuenta
-                case R.id.nav_cuenta:
-                    signOut();
-                    //regresar a LoginActivity
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
                     break;
                     //al precionar el boton de configuracion
                 case R.id.nav_settings:
@@ -151,18 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                        Toast.makeText( MainActivity.this, "Cerrando sesión..",Toast. LENGTH_LONG). show();
-                    }
-                });
-    }
-
-
     @Override
     public void onBackPressed() {
         getSupportFragmentManager(). popBackStackImmediate();
@@ -173,15 +146,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-    /*
-    public void clicSubMenu1(View view) {
-        Toast.makeText(this, "Sub Menu 1 tocado", Toast.LENGTH_SHORT).show();
-        //actionMenu.close(true);
-    }
-    public void clicSubMenu2(View view) {
-        Toast.makeText(this, "Sub Menu 2 tocado xd", Toast.LENGTH_SHORT).show();
-    }
-
-     */
-
 }
