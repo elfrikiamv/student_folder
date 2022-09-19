@@ -16,8 +16,8 @@
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/imgButton"
             android:id="@+id/back_button"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_margin="22dp"
             android:background="@drawable/ic_back_btn">
         </androidx.appcompat.widget.AppCompatImageButton>

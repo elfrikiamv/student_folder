@@ -14,9 +14,16 @@
     <string name="themeMode">Modo oscuro</string>
     <string name="themeModeDesc">Activa el modo oscuro para una mejor experiencia</string>
 
-    <!--inicio de seción-->
+    <!--cuenta google-->
     <string name="signOut">Cerrar sesión</string>
     <string name="signOutDesc">Cerrar sesión de la aplicación</string>
+
+    <!--DriveActivity-->
+    <string name="googleDrive">Google Drive</string>
+    <string name="myFilesDrive">Mis archivos de Drive</string>
+    <string name="listFiles">Lista de archivos</string>
+    <string name="showFiles">Mostrar archivos</string>
+
 
     <string name="text">Este es un texto Este es un texto Este es un texto Este es un texto</string>
 </resources>

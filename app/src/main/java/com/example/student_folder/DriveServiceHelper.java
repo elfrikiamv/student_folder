@@ -93,9 +93,27 @@ public class DriveServiceHelper {
             File metadata = new File()
                     .setParents(Collections.singletonList("root"))
                     .setMimeType("text/plain")
-                    .setName("Presione para nombrar el archivo");
+                    .setName("t11:44.txt");
 
             File googleFile = mDriveService.files().create(metadata).execute();
+            if (googleFile == null) {
+                throw new IOException("Null result when requesting file creation.");
+            }
+
+            return googleFile.getId();
+        });
+    }
+
+    public Task<String> createFileTxt(String name, String content) {
+        return Tasks.call(mExecutor, () -> {
+            // Create a File containing any metadata changes.
+            File metadata = new File().setName(name + ".txt");
+
+            // Convert content to an AbstractInputStreamContent instance.
+            ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", content);
+
+            // Update the metadata and contents.
+            File googleFile = mDriveService.files().create(metadata, contentStream).execute();
             if (googleFile == null) {
                 throw new IOException("Null result when requesting file creation.");
             }
@@ -141,20 +159,6 @@ public class DriveServiceHelper {
 
             // Convert content to an AbstractInputStreamContent instance.
             ByteArrayContent contentStream = ByteArrayContent.fromString("application/pdf", content);
-
-            // Update the metadata and contents.
-            mDriveService.files().update(fileId, metadata, contentStream).execute();
-            return null;
-        });
-    }
-
-    public Task<Void> saveFileTxt(String fileId, String name, String content) {
-        return Tasks.call(mExecutor, () -> {
-            // Create a File containing any metadata changes.
-            File metadata = new File().setName(name);
-
-            // Convert content to an AbstractInputStreamContent instance.
-            ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", content);
 
             // Update the metadata and contents.
             mDriveService.files().update(fileId, metadata, contentStream).execute();

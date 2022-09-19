@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,12 +38,12 @@ public class DriveActivity extends AppCompatActivity {
     private DriveServiceHelper mDriveServiceHelper;
     private String mOpenFileId;
 
-    private EditText mFileTitleEditText;
-    private EditText mDocContentEditText;
+    /*private EditText mFileTitleEditText;
+    private EditText mDocContentEditText;*/
 
     //file list dirve
-    public EditText dFileList;
-    public EditText dNameFileList;
+    public EditText nameDriveFileList;
+    public EditText textDriveFileList;
 
     FloatingActionMenu actionMenu;
     private DrawerLayout drawerLayout;
@@ -51,6 +52,17 @@ public class DriveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drive);
+
+        //------------->backButton
+        View backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+            }
+        });
+        //<-------------backButton
 
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         //nav
@@ -73,12 +85,13 @@ public class DriveActivity extends AppCompatActivity {
          */
 
         // Store the EditText boxes to be updated when files are opened/created/modified.
-        mFileTitleEditText = findViewById(R.id.file_title_edittext);
-        mDocContentEditText = findViewById(R.id.doc_content_edittext);
+        //mFileTitleEditText = findViewById(R.id.file_title_edittext);
+        //mDocContentEditText = findViewById(R.id.doc_content_edittext);
 
-        //mostrar file list drive
-        dFileList = findViewById(R.id.tv_fileList);
-        dNameFileList = findViewById(R.id.tv_nameFileList);
+        //---------------->Store the EditText boxes to be updated when files are opened/created/modified.
+        nameDriveFileList = findViewById(R.id.et_nameFileList);
+        textDriveFileList = findViewById(R.id.et_textFileList);
+        //<----------------Store the EditText boxes to be updated when files are opened/created/modified.
 
         // Set the onClick listeners for the button bar.
         /*findViewById(R.id.open_btn).setOnClickListener(view -> openFilePicker());
@@ -86,11 +99,18 @@ public class DriveActivity extends AppCompatActivity {
         findViewById(R.id.menu_file_pdf).setOnClickListener(view -> saveFilePdf());
         findViewById(R.id.menu_file_txt).setOnClickListener(view -> saveFileTxt());
         findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());*/
-        findViewById(R.id.query_btn).setOnClickListener(view -> query());
 
-        //floating menu
-        /*actionMenu = (FloatingActionMenu) findViewById(R.id.fabFile);
-        actionMenu.setClosedOnTouchOutside(true);*/
+        //---------------->floating button crear .txt en drive
+        findViewById(R.id.menu_file_txt).setOnClickListener(view -> createFileTxt());
+
+        //---------------->floating button mostar DriveFileList
+        findViewById(R.id.query_btn).setOnClickListener(view -> query());
+        //<----------------floating button mostar DriveFileList
+
+        //------------->floating menu
+        actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
+        actionMenu.setClosedOnTouchOutside(true);
+        //<-------------floating menu
 
         // Authenticate the user. For most apps, this should be done when the user performs an
         // action that requires Drive access rather than in onCreate.
@@ -210,8 +230,8 @@ public class DriveActivity extends AppCompatActivity {
                         String name = nameAndContent.first;
                         String content = nameAndContent.second;
 
-                        mFileTitleEditText.setText(name);
-                        mDocContentEditText.setText(content);
+                        nameDriveFileList.setText(name);
+                        textDriveFileList.setText(content);
 
                         // Files opened through SAF cannot be modified.
                         setReadOnlyMode();
@@ -237,6 +257,38 @@ public class DriveActivity extends AppCompatActivity {
         }
     }
 
+    private void createFileTxt() {
+
+        /*if (mDriveServiceHelper != null && mOpenFileId != null) {
+            //Log.d(TAG, "Saving " + mOpenFileId);
+            Toast.makeText(this, "Guardando..." + mOpenFileId+"..", Toast.LENGTH_SHORT).show();
+
+            //String fileName = nameDriveFileList.getText().toString();
+            //String fileContent = textDriveFileList.getText().toString();
+
+            mDriveServiceHelper.saveFileTxt(mOpenFileId, fileName, fileContent)
+                    .addOnFailureListener(exception ->
+                            Log.e(TAG, "Unable to save file via REST.", exception));
+        }*/
+
+        if (mDriveServiceHelper != null) {
+            Log.d(TAG, "Creating a file txt.");
+            //Toast.makeText(this, "Creando archivo...", Toast.LENGTH_LONG).show();
+
+            String fileName = nameDriveFileList.getText().toString();
+            String fileContent = textDriveFileList.getText().toString();
+
+            mDriveServiceHelper.createFileTxt(fileName, fileContent)
+                    .addOnSuccessListener(fileId ->
+                            Toast.makeText(this, "Se guardó con el id: " + fileId, Toast.LENGTH_LONG).show())
+                    .addOnFailureListener(exception ->
+                            Log.e(TAG, "Couldn't create file.", exception));
+            //Toast.makeText(this, "Couldn't create file.", exception+"..", Toast.LENGTH_LONG).show();
+        }
+
+        actionMenu.close(true);
+    }
+
     /**
      * Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
      */
@@ -250,8 +302,8 @@ public class DriveActivity extends AppCompatActivity {
                         String name = nameAndContent.first;
                         String content = nameAndContent.second;
 
-                        mFileTitleEditText.setText(name);
-                        mDocContentEditText.setText(content);
+                        nameDriveFileList.setText(name);
+                        textDriveFileList.setText(content);
 
                         setReadWriteMode(fileId);
                     })
@@ -268,25 +320,10 @@ public class DriveActivity extends AppCompatActivity {
             //Log.d(TAG, "Saving " + mOpenFileId);
             Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
 
-            String fileName = mFileTitleEditText.getText().toString();
-            String fileContent = mDocContentEditText.getText().toString();
+            String fileName = nameDriveFileList.getText().toString();
+            String fileContent = textDriveFileList.getText().toString();
 
             mDriveServiceHelper.saveFilePdf(mOpenFileId, fileName, fileContent)
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to save file via REST.", exception));
-        }
-        actionMenu.close(true);
-    }
-
-    private void saveFileTxt() {
-        if (mDriveServiceHelper != null && mOpenFileId != null) {
-            //Log.d(TAG, "Saving " + mOpenFileId);
-            Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
-
-            String fileName = mFileTitleEditText.getText().toString();
-            String fileContent = mDocContentEditText.getText().toString();
-
-            mDriveServiceHelper.saveFileTxt(mOpenFileId, fileName, fileContent)
                     .addOnFailureListener(exception ->
                             Log.e(TAG, "Unable to save file via REST.", exception));
         }
@@ -298,8 +335,8 @@ public class DriveActivity extends AppCompatActivity {
             //Log.d(TAG, "Saving " + mOpenFileId);
             Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
 
-            String fileName = mFileTitleEditText.getText().toString();
-            String fileContent = mDocContentEditText.getText().toString();
+            String fileName = nameDriveFileList.getText().toString();
+            String fileContent = textDriveFileList.getText().toString();
 
             mDriveServiceHelper.saveFileRtf(mOpenFileId, fileName, fileContent)
                     .addOnFailureListener(exception ->
@@ -325,13 +362,16 @@ public class DriveActivity extends AppCompatActivity {
                         }
                         String fileNames = builder.toString();
 
-                        dFileList.setText("File List");
-                        dNameFileList.setText(fileNames);
+                        nameDriveFileList.setText("Lista de archivos");
+                        textDriveFileList.setText(fileNames);
 
                         setReadOnlyMode();
                     })
                     .addOnFailureListener(exception -> Log.e(TAG, "Unable to query files.", exception));
         }
+        //------------->cerrar menuDriveFile
+        actionMenu.close(true);
+        //------------->cerrar menuDriveFile
         return;
     }
 
@@ -339,8 +379,8 @@ public class DriveActivity extends AppCompatActivity {
      * Updates the UI to read-only mode.
      */
     private void setReadOnlyMode() {
-        mFileTitleEditText.setEnabled(false);
-        mDocContentEditText.setEnabled(false);
+        //mFileTitleEditText.setEnabled(false);
+        nameDriveFileList.setEnabled(false);
         mOpenFileId = null;
     }
 
@@ -348,10 +388,17 @@ public class DriveActivity extends AppCompatActivity {
      * Updates the UI to read/write mode on the document identified by {@code fileId}.
      */
     private void setReadWriteMode(String fileId) {
-        mFileTitleEditText.setEnabled(true);
-        mDocContentEditText.setEnabled(true);
+        nameDriveFileList.setEnabled(true);
+        textDriveFileList.setEnabled(true);
         mOpenFileId = fileId;
     }
 
+    //------------->backButton
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    //<-------------backButton
 
 }

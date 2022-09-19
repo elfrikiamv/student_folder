@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,191 +8,227 @@
     style="@style/screen"
     tools:context=".DriveActivity">
 
-    <!--<androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <LinearLayout
+        android:id="@+id/lL_googleDrive"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
 
-    <RelativeLayout
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="22dp"
+            android:background="@drawable/ic_back_btn">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <TextView
+            style="@style/textHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/googleDrive">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lL_filesDrive"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lL_googleDrive"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="22dp">
 
-        <EditText
-            android:id="@+id/file_title_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_alignParentTop="true"
-            android:textColor="@color/white" />
+        <TextView
+            style="@style/textHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            android:text="@string/myFilesDrive">
+        </TextView>
 
-        <EditText
-            android:id="@+id/doc_content_edittext"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/btn_layout"
-            android:layout_below="@id/file_title_edittext"
-            android:hint="Presione para agregar texto al archivo"
-            android:gravity="start|top"
-            android:textColor="@color/white"
-            android:textColorHint="@color/invertidoC"/>
+            android:layout_marginTop="3dp"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/btn_layout"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            <!--<TextView
+                style="@style/textMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textSize="14dp"
+                android:text="@string/listFiles">
+            </TextView>-->
 
-
-            <Button
-                android:id="@+id/open_btn"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="Open"
-                style="?attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/create_btn"
-                android:layout_width="182dp"
-                android:layout_height="42dp"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/custom_button_back"
-                android:text="Crear" />
-
-
-
-            <Button
-                android:id="@+id/query_btn"
-                style="?attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Query" />
-
-        </LinearLayout>
-
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/fabFile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            app:menu_backgroundColor="@color/bg_fb"
-            app:menu_colorNormal="@color/invertidoC"
-            app:menu_colorPressed="@color/carbon"
-            app:menu_colorRipple="@color/carbon"
-            app:menu_fab_label="Guardar como"
-            app:menu_icon="@drawable/ic_save_v"
-            app:menu_labels_colorNormal="@color/bg_fb"
-            app:menu_labels_colorPressed="@color/carbon"
-            app:menu_labels_colorRipple="@color/invertidoC"
-            app:menu_labels_showShadow="true"
-            app:menu_labels_textColor="@color/white"
-            app:menu_shadowColor="@color/black"
-            app:menu_shadowRadius="1dp"
-            app:menu_shadowXOffset="1dp"
-            app:menu_shadowYOffset="1dp"
-            app:menu_showShadow="true">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menu_file_pdf"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_pdf_d"
-                app:fab_colorNormal="@color/glass"
-                app:fab_colorPressed="@color/carbon"
-                app:fab_colorRipple="@color/carbon"
-                app:fab_label="Formato PDF"
-                app:fab_shadowColor="@color/black"
-                app:fab_shadowRadius="1dp"
-                app:fab_shadowXOffset="1dp"
-                app:fab_shadowYOffset="1dp"
-                app:fab_showShadow="true" />
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menu_file_txt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_txt_d"
-                app:fab_colorNormal="@color/glass"
-                app:fab_colorPressed="@color/carbon"
-                app:fab_colorRipple="@color/carbon"
-                app:fab_label="Texto Plano"
-                app:fab_shadowColor="@color/black"
-                app:fab_shadowRadius="1dp"
-                app:fab_shadowXOffset="1dp"
-                app:fab_shadowYOffset="1dp"
-                app:fab_showShadow="true" />
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menu_file_docx"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_rtf_d"
-                app:fab_colorNormal="@color/glass"
-                app:fab_colorPressed="@color/carbon"
-                app:fab_colorRipple="@color/carbon"
-                app:fab_label="Documento de Wordpad"
-                app:fab_shadowColor="@color/black"
-                app:fab_shadowRadius="1dp"
-                app:fab_shadowXOffset="1dp"
-                app:fab_shadowYOffset="1dp"
-                app:fab_showShadow="true" />
-
-        </com.github.clans.fab.FloatingActionMenu>
-    </RelativeLayout>-->
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_setFile"
-                android:layout_gravity="center"
+            <EditText
+                style="@style/textMedium"
+                android:id="@+id/et_nameFileList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                android:layout_marginTop="13dp">
+                android:textSize="16dp"
+                android:layout_marginTop="3dp">
+            </EditText>
 
-                <LinearLayout
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    style="@style/textMedium"
+                    android:id="@+id/et_textFileList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:textSize="16dp"
+                    android:layout_marginTop="3dp">
+                </EditText>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/file_title_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white">
-                    </EditText>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menuDriveFile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:menu_backgroundColor="@color/bg_fb"
+        app:menu_colorNormal="@color/invertidoC"
+        app:menu_colorPressed="@color/carbon"
+        app:menu_colorRipple="@color/carbon"
+        app:menu_fab_label="Guardar como"
+        app:menu_icon="@drawable/ic_save_v"
+        app:menu_labels_colorNormal="@color/bg_fb"
+        app:menu_labels_colorPressed="@color/carbon"
+        app:menu_labels_colorRipple="@color/invertidoC"
+        app:menu_labels_showShadow="true"
+        app:menu_labels_textColor="@color/white"
+        app:menu_shadowColor="@color/black"
+        app:menu_shadowRadius="1dp"
+        app:menu_shadowXOffset="1dp"
+        app:menu_shadowYOffset="1dp"
+        app:menu_showShadow="true">
 
-                    <EditText
-                        android:id="@+id/doc_content_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="143dp"
-                        android:gravity="start|top"
-                        android:hint="Presione para agregar texto al archivo"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/invertidoC">
-                    </EditText>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/query_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_pdf_d"
+            app:fab_colorNormal="@color/glass"
+            app:fab_colorPressed="@color/carbon"
+            app:fab_colorRipple="@color/carbon"
+            app:fab_label="@string/showFiles"
+            app:fab_shadowColor="@color/black"
+            app:fab_shadowRadius="1dp"
+            app:fab_shadowXOffset="1dp"
+            app:fab_shadowYOffset="1dp"
+            app:fab_showShadow="true" />
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_file_txt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_txt_d"
+            app:fab_colorNormal="@color/glass"
+            app:fab_colorPressed="@color/carbon"
+            app:fab_colorRipple="@color/carbon"
+            app:fab_label="Texto Plano"
+            app:fab_shadowColor="@color/black"
+            app:fab_shadowRadius="1dp"
+            app:fab_shadowXOffset="1dp"
+            app:fab_shadowYOffset="1dp"
+            app:fab_showShadow="true" />
+
+        <!--<com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_file_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_pdf_d"
+            app:fab_colorNormal="@color/glass"
+            app:fab_colorPressed="@color/carbon"
+            app:fab_colorRipple="@color/carbon"
+            app:fab_label="Formato PDF"
+            app:fab_shadowColor="@color/black"
+            app:fab_shadowRadius="1dp"
+            app:fab_shadowXOffset="1dp"
+            app:fab_shadowYOffset="1dp"
+            app:fab_showShadow="true" />-->
+
+        <!--<com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_file_docx"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_rtf_d"
+            app:fab_colorNormal="@color/glass"
+            app:fab_colorPressed="@color/carbon"
+            app:fab_colorRipple="@color/carbon"
+            app:fab_label="Documento de Wordpad"
+            app:fab_shadowColor="@color/black"
+            app:fab_shadowRadius="1dp"
+            app:fab_shadowXOffset="1dp"
+            app:fab_shadowYOffset="1dp"
+            app:fab_showShadow="true" />-->
+
+    </com.github.clans.fab.FloatingActionMenu>
+</RelativeLayout>
 
 
-            <androidx.cardview.widget.CardView
+    <!--<androidx.appcompat.widget.AppCompatButton
+        style="@style/button"
+        android:id="@+id/query_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lL_filesDrive"
+        android:layout_marginTop="3dp"
+        android:text="@string/showFiles">
+    </androidx.appcompat.widget.AppCompatButton>-->
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ScrollView>-->
+    <!--<androidx.cardview.widget.CardView
+        android:id="@+id/cv_setFile"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        android:layout_marginTop="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/file_title_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white">
+            </EditText>
+
+            <EditText
+                android:id="@+id/doc_content_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="143dp"
+                android:gravity="start|top"
+                android:hint="Presione para agregar texto al archivo"
+                android:textColor="@color/white"
+                android:textColorHint="@color/invertidoC">
+            </EditText>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>-->
+
+
+            <!--<androidx.cardview.widget.CardView
                 android:id="@+id/cv_fileList"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
@@ -221,11 +257,146 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Query" />
-
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>-->
 
-        </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+
+    <!--<androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/file_title_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/doc_content_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_layout"
+                android:layout_below="@id/file_title_edittext"
+                android:hint="Presione para agregar texto al archivo"
+                android:gravity="start|top"
+                android:textColor="@color/white"
+                android:textColorHint="@color/invertidoC"/>
+
+            <LinearLayout
+                android:id="@+id/btn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/open_btn"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="Open"
+                    style="?attr/buttonBarButtonStyle" />
+
+                <Button
+                    android:id="@+id/create_btn"
+                    android:layout_width="182dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@drawable/custom_button_back"
+                    android:text="Crear" />
+
+
+
+                <Button
+                    android:id="@+id/query_btn"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Query" />
+
+            </LinearLayout>
+
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/fabFile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                app:menu_backgroundColor="@color/bg_fb"
+                app:menu_colorNormal="@color/invertidoC"
+                app:menu_colorPressed="@color/carbon"
+                app:menu_colorRipple="@color/carbon"
+                app:menu_fab_label="Guardar como"
+                app:menu_icon="@drawable/ic_save_v"
+                app:menu_labels_colorNormal="@color/bg_fb"
+                app:menu_labels_colorPressed="@color/carbon"
+                app:menu_labels_colorRipple="@color/invertidoC"
+                app:menu_labels_showShadow="true"
+                app:menu_labels_textColor="@color/white"
+                app:menu_shadowColor="@color/black"
+                app:menu_shadowRadius="1dp"
+                app:menu_shadowXOffset="1dp"
+                app:menu_shadowYOffset="1dp"
+                app:menu_showShadow="true">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/menu_file_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_pdf_d"
+                    app:fab_colorNormal="@color/glass"
+                    app:fab_colorPressed="@color/carbon"
+                    app:fab_colorRipple="@color/carbon"
+                    app:fab_label="Formato PDF"
+                    app:fab_shadowColor="@color/black"
+                    app:fab_shadowRadius="1dp"
+                    app:fab_shadowXOffset="1dp"
+                    app:fab_shadowYOffset="1dp"
+                    app:fab_showShadow="true" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/menu_file_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_txt_d"
+                    app:fab_colorNormal="@color/glass"
+                    app:fab_colorPressed="@color/carbon"
+                    app:fab_colorRipple="@color/carbon"
+                    app:fab_label="Texto Plano"
+                    app:fab_shadowColor="@color/black"
+                    app:fab_shadowRadius="1dp"
+                    app:fab_shadowXOffset="1dp"
+                    app:fab_shadowYOffset="1dp"
+                    app:fab_showShadow="true" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/menu_file_docx"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_rtf_d"
+                    app:fab_colorNormal="@color/glass"
+                    app:fab_colorPressed="@color/carbon"
+                    app:fab_colorRipple="@color/carbon"
+                    app:fab_label="Documento de Wordpad"
+                    app:fab_shadowColor="@color/black"
+                    app:fab_shadowRadius="1dp"
+                    app:fab_shadowXOffset="1dp"
+                    app:fab_shadowYOffset="1dp"
+                    app:fab_showShadow="true" />
+
+            </com.github.clans.fab.FloatingActionMenu>
+        </RelativeLayout>-->
