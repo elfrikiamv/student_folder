@@ -22,7 +22,9 @@
     <string name="googleDrive">Google Drive</string>
     <string name="myFilesDrive">Mis archivos de Drive</string>
     <string name="listFiles">Lista de archivos</string>
-    <string name="showFiles">Mostrar archivos</string>
+    <string name="queryFiles">Consulta de archivos</string>
+    <string name="createFileText">Crear archivo de texto</string>
+    <string name="menu">Menú</string>
 
 
     <string name="text">Este es un texto Este es un texto Este es un texto Este es un texto</string>

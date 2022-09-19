@@ -101,10 +101,10 @@ public class DriveActivity extends AppCompatActivity {
         findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());*/
 
         //---------------->floating button crear .txt en drive
-        findViewById(R.id.menu_file_txt).setOnClickListener(view -> createFileTxt());
+        findViewById(R.id.btn_createFrileTxt).setOnClickListener(view -> createFileTxt());
 
         //---------------->floating button mostar DriveFileList
-        findViewById(R.id.query_btn).setOnClickListener(view -> query());
+        findViewById(R.id.btn_queryFiles).setOnClickListener(view -> queryFiles());
         //<----------------floating button mostar DriveFileList
 
         //------------->floating menu
@@ -345,12 +345,10 @@ public class DriveActivity extends AppCompatActivity {
         actionMenu.close(true);
     }
 
-
-
     /**
      * Queries the Drive REST API for files visible to this app and lists them in the content view.
      */
-    private void query() {
+    private void queryFiles() {
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Querying for files.");
 

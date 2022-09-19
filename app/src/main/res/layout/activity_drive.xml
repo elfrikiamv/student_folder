@@ -94,57 +94,35 @@
     </LinearLayout>
 
     <com.github.clans.fab.FloatingActionMenu
+
+        style="@style/menuFloating"
         android:id="@+id/menuDriveFile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:menu_backgroundColor="@color/bg_fb"
-        app:menu_colorNormal="@color/invertidoC"
-        app:menu_colorPressed="@color/carbon"
-        app:menu_colorRipple="@color/carbon"
-        app:menu_fab_label="Guardar como"
-        app:menu_icon="@drawable/ic_save_v"
-        app:menu_labels_colorNormal="@color/bg_fb"
-        app:menu_labels_colorPressed="@color/carbon"
-        app:menu_labels_colorRipple="@color/invertidoC"
-        app:menu_labels_showShadow="true"
-        app:menu_labels_textColor="@color/white"
-        app:menu_shadowColor="@color/black"
-        app:menu_shadowRadius="1dp"
-        app:menu_shadowXOffset="1dp"
-        app:menu_shadowYOffset="1dp"
-        app:menu_showShadow="true">
+        app:menu_fab_label="@string/menu"
+        app:menu_icon="@drawable/ic_save_v">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/query_btn"
+
+            style="@style/buttonFloating"
+            android:id="@+id/btn_queryFiles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_pdf_d"
-            app:fab_colorNormal="@color/glass"
-            app:fab_colorPressed="@color/carbon"
-            app:fab_colorRipple="@color/carbon"
-            app:fab_label="@string/showFiles"
-            app:fab_shadowColor="@color/black"
-            app:fab_shadowRadius="1dp"
-            app:fab_shadowXOffset="1dp"
-            app:fab_shadowYOffset="1dp"
-            app:fab_showShadow="true" />
+            app:fab_label="@string/queryFiles">
+        </com.github.clans.fab.FloatingActionButton>
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_file_txt"
+
+            style="@style/buttonFloating"
+            android:id="@+id/btn_createFrileTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_txt_d"
-            app:fab_colorNormal="@color/glass"
-            app:fab_colorPressed="@color/carbon"
-            app:fab_colorRipple="@color/carbon"
-            app:fab_label="Texto Plano"
-            app:fab_shadowColor="@color/black"
-            app:fab_shadowRadius="1dp"
-            app:fab_shadowXOffset="1dp"
-            app:fab_shadowYOffset="1dp"
-            app:fab_showShadow="true" />
+            app:fab_label="@string/createFileText">
+        </com.github.clans.fab.FloatingActionButton>
 
         <!--<com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_file_pdf"

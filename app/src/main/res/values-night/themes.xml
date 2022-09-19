@@ -20,7 +20,7 @@
 
     <!--Dark theme mode-->
     <style name="screen" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/background</item>
+        <item name="android:background">@color/backgroundDark</item>
     </style>
 
     <!--text color dark-->
@@ -36,10 +36,6 @@
         <item name="android:textColor">@color/white_38</item>
     </style>
 
-    <style name="text" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <!--imgButton color dark-->
     <style name="imgButton" parent="Theme.AppCompat.NoActionBar">
         <item name="android:backgroundTint">@color/white_87</item>
@@ -47,10 +43,38 @@
 
     <!--button color dark-->
     <style name="button" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/Primary</item>
-        <item name="android:textColor">@color/white_87</item>
+        <item name="android:background">@color/primaryDark</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--floating button color dark-->
+    <style name="buttonFloating" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="fab_colorNormal">@color/glass</item>
+        <item name="fab_colorPressed">@color/glass</item>
+        <item name="fab_colorRipple">@color/glass</item>
+        <item name="fab_shadowColor">@color/black</item>
+        <item name="fab_shadowRadius">6dp</item>
+        <item name="fab_showShadow">true</item>
+    </style>
+
+    <!--floating menu color dark-->
+    <style name="menuFloating" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="menu_backgroundColor">@color/floatingButtonBackgroundDark</item>
+        <item name="menu_colorNormal">@color/primaryDark</item>
+        <item name="menu_colorPressed">@color/white</item>
+        <item name="menu_colorRipple">@color/white</item>
+        <item name="menu_labels_colorNormal">@color/surface06dp</item>
+        <item name="menu_labels_colorPressed">@color/black</item>
+        <item name="menu_labels_colorRipple">@color/white</item>
+        <item name="menu_labels_showShadow">true</item>
+        <item name="menu_labels_textColor">@color/white</item>
+        <item name="menu_shadowColor">@color/black</item>
+        <item name="menu_shadowRadius">6dp</item>
+        <item name="menu_showShadow">true</item>
     </style>
 
 </resources>

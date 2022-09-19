@@ -5,28 +5,35 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
     <color name="carbon">#141414</color>
     <color name="moradis">#6441a5</color>
     <color name="invertidoC">#e6e6e6</color>
-    <color name="glass">#00000000</color>
-    <color name="bg_fb">#B0141414</color>
+    <color name="bg_fb">#292929</color>
+
 
     <!--set color app-->
-    <color name="Primary">#771B69</color>
-    <color name="Secondary">#e492cb</color>
-    <color name="background">#1a1319</color>
-    <!--text color dark-->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="glass">#00000000</color>
+    <color name="primaryLight">#771B69</color>
+    <color name="primaryDark">#e492cb</color>
+    <color name="backgroundDark">#1a1319</color>
+    <color name="backgroundLight">#FFFFFFFF</color>
+
+    <!--color dark-->
     <color name="white_87">#DEFFFFFF</color>
     <color name="white_60">#99FFFFFF</color>
     <color name="white_38">#61FFFFFF</color>
-    <!--text color light-->
+    <color name="surface03dp">#242424</color>
+    <color name="surface06dp">#2C2C2C</color>
+    <color name="floatingButtonBackgroundDark">#6B0C0C0C</color>
+
+    <!--color light-->
+
     <color name="black_87">#DE000000</color>
     <color name="black_60">#99000000</color>
     <color name="black_38">#61000000</color>
-
-
+    <color name="floatingButtonBackgroundLight">#6B1A1319</color>
 
 </resources>
