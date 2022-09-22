@@ -181,21 +181,23 @@ public class DriveServiceHelper {
     }
 
     /**
-     * Returns a {@link FileList} containing all the visible files in the user's My Drive.
-     *
      * <p>The returned list will only contain files visible to this app, i.e. those which were
      * created by this app. To perform operations on files not created by the app, the project must
      * request Drive Full Scope in the <a href="https://play.google.com/apps/publish">Google
      * Developer's Console</a> and be submitted to Google for verification.</p>
      */
+    //------------->Returns a {@link FileList} containing all the visible files in the user's My Drive.
     public Task<FileList> queryFiles() {
+
         return Tasks.call(mExecutor, new Callable<FileList>() {
             @Override
             public FileList call() throws Exception {
+
                 return mDriveService.files().list().setSpaces("drive").execute();
             }
         });
     }
+    //<-------------Returns a {@link FileList} containing all the visible files in the user's My Drive.
 
     /**
      * Returns an {@link Intent} for opening the Storage Access Framework file picker.

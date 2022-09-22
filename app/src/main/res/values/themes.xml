@@ -49,7 +49,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <!--floating button color dark-->
+    <!--floating button color light-->
     <style name="buttonFloating" parent="Theme.AppCompat.NoActionBar">
 
         <item name="fab_colorNormal">@color/glass</item>
@@ -60,7 +60,7 @@
         <item name="fab_showShadow">true</item>
     </style>
 
-    <!--floating menu color dark-->
+    <!--floating menu color light-->
     <style name="menuFloating" parent="Theme.AppCompat.NoActionBar">
 
         <item name="menu_backgroundColor">@color/floatingButtonBackgroundLight</item>

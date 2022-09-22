@@ -34,6 +34,21 @@
             android:textStyle="bold"
             android:text="@string/googleDrive">
         </TextView>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </Space>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
+            android:id="@+id/btn_showFiles"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="22dp"
+            android:background="@drawable/ic_eye">
+        </androidx.appcompat.widget.AppCompatImageButton>
     </LinearLayout>
 
     <LinearLayout
@@ -95,29 +110,18 @@
 
     <com.github.clans.fab.FloatingActionMenu
 
-        style="@style/menuFloating"
         android:id="@+id/menuDriveFile"
+        style="@style/menuFloating"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:menu_fab_label="@string/menu"
-        app:menu_icon="@drawable/ic_save_v">
+        app:menu_icon="@drawable/ic_add">
 
         <com.github.clans.fab.FloatingActionButton
 
-            style="@style/buttonFloating"
-            android:id="@+id/btn_queryFiles"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_pdf_d"
-            app:fab_label="@string/queryFiles">
-        </com.github.clans.fab.FloatingActionButton>
-
-        <com.github.clans.fab.FloatingActionButton
-
-            style="@style/buttonFloating"
             android:id="@+id/btn_createFrileTxt"
+            style="@style/buttonFloating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_txt_d"

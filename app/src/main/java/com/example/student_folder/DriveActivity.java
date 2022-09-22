@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.github.clans.fab.FloatingActionMenu;
@@ -104,8 +104,12 @@ public class DriveActivity extends AppCompatActivity {
         findViewById(R.id.btn_createFrileTxt).setOnClickListener(view -> createFileTxt());
 
         //---------------->floating button mostar DriveFileList
-        findViewById(R.id.btn_queryFiles).setOnClickListener(view -> queryFiles());
+        //findViewById(R.id.btn_queryFiles).setOnClickListener(view -> queryFiles());
         //<----------------floating button mostar DriveFileList
+
+        //------------->button show the file list or not
+        findViewById(R.id.btn_showFiles).setOnClickListener(view -> showFiles());
+        //<-------------button show the file list or not
 
         //------------->floating menu
         actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
@@ -115,7 +119,11 @@ public class DriveActivity extends AppCompatActivity {
         // Authenticate the user. For most apps, this should be done when the user performs an
         // action that requires Drive access rather than in onCreate.
         requestSignIn();
+
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -278,12 +286,17 @@ public class DriveActivity extends AppCompatActivity {
             String fileName = nameDriveFileList.getText().toString();
             String fileContent = textDriveFileList.getText().toString();
 
-            mDriveServiceHelper.createFileTxt(fileName, fileContent)
-                    .addOnSuccessListener(fileId ->
-                            Toast.makeText(this, "Se guardó con el id: " + fileId, Toast.LENGTH_LONG).show())
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Couldn't create file.", exception));
-            //Toast.makeText(this, "Couldn't create file.", exception+"..", Toast.LENGTH_LONG).show();
+            if (fileName.isEmpty() || fileContent.isEmpty()) {
+                Toast.makeText(this, "El nombre y el contenido del archivo no pueden estar vacíos.", Toast.LENGTH_LONG).show();
+            } else {
+
+                Toast.makeText(this, "Creando archivo", Toast.LENGTH_SHORT).show();
+
+                mDriveServiceHelper.createFileTxt(fileName, fileContent)
+                        .addOnSuccessListener(fileId ->  readFile(fileId))
+                        .addOnFailureListener(exception ->
+                                Log.e(TAG, "Couldn't create file.", exception));
+            }
         }
 
         actionMenu.close(true);
@@ -294,8 +307,9 @@ public class DriveActivity extends AppCompatActivity {
      */
     private void readFile(String fileId) {
         if (mDriveServiceHelper != null) {
-            //Log.d(TAG, "Reading file " + fileId);
-            Toast.makeText(this, "Leyendo archivo " + fileId, Toast.LENGTH_LONG).show();
+
+            Toast.makeText(this, "Leyendo " + fileId+"..", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Reading " + fileId);
 
             mDriveServiceHelper.readFile(fileId)
                     .addOnSuccessListener(nameAndContent -> {
@@ -305,10 +319,11 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
 
+                        // Enable file saving now that a file is open.
                         setReadWriteMode(fileId);
                     })
                     .addOnFailureListener(exception ->
-                            Log.e(TAG, "Couldn't read file.", exception));
+                            Log.e(TAG, "Unable to read file.", exception));
         }
     }
 
@@ -345,14 +360,14 @@ public class DriveActivity extends AppCompatActivity {
         actionMenu.close(true);
     }
 
-    /**
-     * Queries the Drive REST API for files visible to this app and lists them in the content view.
-     */
+    //------------->Queries the Drive REST API for files visible to this app and lists them in the content view
     private void queryFiles() {
+
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Querying for files.");
 
             mDriveServiceHelper.queryFiles()
+
                     .addOnSuccessListener(fileList -> {
                         StringBuilder builder = new StringBuilder();
                         for (File file : fileList.getFiles()) {
@@ -367,11 +382,32 @@ public class DriveActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(exception -> Log.e(TAG, "Unable to query files.", exception));
         }
-        //------------->cerrar menuDriveFile
-        actionMenu.close(true);
-        //------------->cerrar menuDriveFile
+
         return;
     }
+    //<-------------Queries the Drive REST API for files visible to this app and lists them in the content view
+
+    //------------->show the file list or not
+    private void showFiles() {
+
+        String nameEditText = nameDriveFileList.getText().toString().trim();
+
+        if (nameEditText.isEmpty()) {
+
+            queryFiles();
+            findViewById(R.id.btn_showFiles).setBackgroundResource(R.drawable.ic_eye_crossed);
+        } else {
+
+            nameDriveFileList.getText().clear();
+            textDriveFileList.getText().clear();
+            nameDriveFileList.setEnabled(true);
+
+            findViewById(R.id.btn_showFiles).setBackgroundResource(R.drawable.ic_eye);
+        }
+    }
+    //<-------------show the file list or not
+
+
 
     /**
      * Updates the UI to read-only mode.
