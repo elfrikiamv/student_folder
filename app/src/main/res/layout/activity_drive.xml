@@ -43,10 +43,22 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/imgButton"
+            android:id="@+id/btn_saveFile"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="12dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_save">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
             android:id="@+id/btn_showFiles"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="22dp"
+            android:layout_margin="12dp"
+            android:layout_gravity="center"
             android:background="@drawable/ic_eye">
         </androidx.appcompat.widget.AppCompatImageButton>
     </LinearLayout>
@@ -120,7 +132,17 @@
 
         <com.github.clans.fab.FloatingActionButton
 
-            android:id="@+id/btn_createFrileTxt"
+            android:id="@+id/btn_openFileTxt"
+            style="@style/buttonFloating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_txt_d"
+            app:fab_label="@string/openFileText">
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+
+            android:id="@+id/btn_createFileTxt"
             style="@style/buttonFloating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

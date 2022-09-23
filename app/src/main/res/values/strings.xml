@@ -24,6 +24,7 @@
     <string name="listFiles">Lista de archivos</string>
     <string name="queryFiles">Consulta de archivos</string>
     <string name="createFileText">Crear archivo de texto</string>
+    <string name="openFileText">Abrir archivo de texto</string>
     <string name="menu">Menú</string>
 
 

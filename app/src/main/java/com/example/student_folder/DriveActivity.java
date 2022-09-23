@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -41,9 +43,26 @@ public class DriveActivity extends AppCompatActivity {
     /*private EditText mFileTitleEditText;
     private EditText mDocContentEditText;*/
 
-    //file list dirve
+    //------------->file list dirve
     public EditText nameDriveFileList;
     public EditText textDriveFileList;
+    //<-------------file list dirve
+
+    //------------->save file button
+    public ImageButton saveFileButton;
+    //<-------------save file button
+
+    //------------->save file button
+    public ImageButton showFileListButton;
+    //<-------------save file button
+
+    //------------->create File Txt Button
+    public FloatingActionButton createFileTxtButton;
+    //<-------------create File Txt Button
+
+    //------------->open File Txt Button
+    public FloatingActionButton openFilePickerButton;
+    //<-------------open File Txt Button
 
     FloatingActionMenu actionMenu;
     private DrawerLayout drawerLayout;
@@ -101,15 +120,24 @@ public class DriveActivity extends AppCompatActivity {
         findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());*/
 
         //---------------->floating button crear .txt en drive
-        findViewById(R.id.btn_createFrileTxt).setOnClickListener(view -> createFileTxt());
+        createFileTxtButton = findViewById(R.id.btn_createFileTxt);
+        createFileTxtButton.setOnClickListener(view -> createFileTxt());
+        //<----------------floating button crear .txt en drive
 
-        //---------------->floating button mostar DriveFileList
-        //findViewById(R.id.btn_queryFiles).setOnClickListener(view -> queryFiles());
-        //<----------------floating button mostar DriveFileList
+        //---------------->open file txt
+        openFilePickerButton = findViewById(R.id.btn_openFileTxt);
+        openFilePickerButton.setOnClickListener(view -> openFilePicker());
+        //<----------------open file txt
 
         //------------->button show the file list or not
-        findViewById(R.id.btn_showFiles).setOnClickListener(view -> showFiles());
+        showFileListButton = findViewById(R.id.btn_showFiles);
+        showFileListButton.setOnClickListener(view -> showFiles());
         //<-------------button show the file list or not
+
+        //------------->button save the file
+        saveFileButton = findViewById(R.id.btn_saveFile);
+        saveFileButton.setOnClickListener(view -> saveFile());
+        //<-------------button save the file
 
         //------------->floating menu
         actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
@@ -121,8 +149,6 @@ public class DriveActivity extends AppCompatActivity {
         requestSignIn();
 
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -162,10 +188,9 @@ public class DriveActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, resultData);
     }
 
-    /**
-     * Starts a sign-in activity using {@link #REQUEST_CODE_SIGN_IN}.
-     */
+    //------------->Starts a sign-in activity using {@link #REQUEST_CODE_SIGN_IN}.
     private void requestSignIn() {
+
         Log.d(TAG, "Requesting sign-in");
 
         GoogleSignInOptions signInOptions =
@@ -177,13 +202,10 @@ public class DriveActivity extends AppCompatActivity {
 
         // The result of the sign-in Intent is handled in onActivityResult.
         startActivityForResult(client.getSignInIntent(), REQUEST_CODE_SIGN_IN);
-
     }
+    //<-------------Starts a sign-in activity using {@link #REQUEST_CODE_SIGN_IN}.
 
-    /**
-     * Handles the {@code result} of a completed sign-in activity initiated from {@link
-     * #requestSignIn()}.
-     */
+    //------------->Handles the {@code result} of a completed sign-in activity initiated from {@link requestSignIn()}.
     private void handleSignInResult(Intent result) {
         GoogleSignIn.getSignedInAccountFromIntent(result)
                 .addOnSuccessListener(googleAccount -> {
@@ -208,10 +230,9 @@ public class DriveActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(exception -> Log.e(TAG, "Unable to sign in.", exception));
     }
+    //<-------------Handles the {@code result} of a completed sign-in activity initiated from {@link requestSignIn()}.
 
-    /**
-     * Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
-     */
+    //------------->Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
     private void openFilePicker() {
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Opening file picker.");
@@ -222,12 +243,12 @@ public class DriveActivity extends AppCompatActivity {
             // The result of the SAF Intent is handled in onActivityResult.
             startActivityForResult(pickerIntent, REQUEST_CODE_OPEN_DOCUMENT);
         }
-    }
 
-    /**
-     * Opens a file from its {@code uri} returned from the Storage Access Framework file picker
-     * initiated by {@link #openFilePicker()}.
-     */
+        actionMenu.close(true);
+    }
+    //<-------------Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
+
+    //------------->Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
     private void openFileFromFilePicker(Uri uri) {
         if (mDriveServiceHelper != null) {
             //Log.d(TAG, "Opening " + uri.getPath());
@@ -240,19 +261,20 @@ public class DriveActivity extends AppCompatActivity {
 
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
+                        nameDriveFileList.setEnabled(false);
+                        saveFileButton.setVisibility(View.VISIBLE);
 
-                        // Files opened through SAF cannot be modified.
-                        setReadOnlyMode();
                     })
                     .addOnFailureListener(exception ->
                             Log.e(TAG, "Unable to open file from picker.", exception));
         }
     }
+    //<-------------Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
 
     /**
      * Creates a new file via the Drive REST API.
      */
-    private void createFile() {
+    /*private void createFile() {
         if (mDriveServiceHelper != null) {
             //Log.d(TAG, "Creating a file.");
             Toast.makeText(this, "Creando archivo...", Toast.LENGTH_LONG).show();
@@ -263,11 +285,9 @@ public class DriveActivity extends AppCompatActivity {
                             Log.e(TAG, "Couldn't create file.", exception));
                             //Toast.makeText(this, "Couldn't create file.", exception+"..", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
-    private void createFileTxt() {
-
-        /*if (mDriveServiceHelper != null && mOpenFileId != null) {
+    /*if (mDriveServiceHelper != null && mOpenFileId != null) {
             //Log.d(TAG, "Saving " + mOpenFileId);
             Toast.makeText(this, "Guardando..." + mOpenFileId+"..", Toast.LENGTH_SHORT).show();
 
@@ -278,6 +298,9 @@ public class DriveActivity extends AppCompatActivity {
                     .addOnFailureListener(exception ->
                             Log.e(TAG, "Unable to save file via REST.", exception));
         }*/
+
+    //------------->create file
+    private void createFileTxt() {
 
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Creating a file txt.");
@@ -301,14 +324,13 @@ public class DriveActivity extends AppCompatActivity {
 
         actionMenu.close(true);
     }
+    //------------->create file
 
-    /**
-     * Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
-     */
+    //------------->Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
     private void readFile(String fileId) {
         if (mDriveServiceHelper != null) {
 
-            Toast.makeText(this, "Leyendo " + fileId+"..", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Leyendo " + fileId+"..", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Reading " + fileId);
 
             mDriveServiceHelper.readFile(fileId)
@@ -324,13 +346,16 @@ public class DriveActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(exception ->
                             Log.e(TAG, "Unable to read file.", exception));
+
+            saveFileButton.setVisibility(View.VISIBLE);
         }
     }
+    //<-------------Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
 
     /**
      * Saves the currently opened file created via {@link #createFile()} if one exists.
      */
-    private void saveFilePdf() {
+   /* private void saveFilePdf() {
         if (mDriveServiceHelper != null && mOpenFileId != null) {
             //Log.d(TAG, "Saving " + mOpenFileId);
             Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
@@ -358,7 +383,7 @@ public class DriveActivity extends AppCompatActivity {
                             Log.e(TAG, "Unable to save file via REST.", exception));
         }
         actionMenu.close(true);
-    }
+    }*/
 
     //------------->Queries the Drive REST API for files visible to this app and lists them in the content view
     private void queryFiles() {
@@ -376,9 +401,8 @@ public class DriveActivity extends AppCompatActivity {
                         String fileNames = builder.toString();
 
                         nameDriveFileList.setText("Lista de archivos");
+                        nameDriveFileList.setEnabled(false);
                         textDriveFileList.setText(fileNames);
-
-                        setReadOnlyMode();
                     })
                     .addOnFailureListener(exception -> Log.e(TAG, "Unable to query files.", exception));
         }
@@ -395,37 +419,66 @@ public class DriveActivity extends AppCompatActivity {
         if (nameEditText.isEmpty()) {
 
             queryFiles();
-            findViewById(R.id.btn_showFiles).setBackgroundResource(R.drawable.ic_eye_crossed);
+            showFileListButton.setBackgroundResource(R.drawable.ic_eye_crossed);
+
+            Toast.makeText(this, "Mostrando lista de archivos", Toast.LENGTH_SHORT).show();
         } else {
 
-            nameDriveFileList.getText().clear();
-            textDriveFileList.getText().clear();
+            emptyDriveFileList();
             nameDriveFileList.setEnabled(true);
 
-            findViewById(R.id.btn_showFiles).setBackgroundResource(R.drawable.ic_eye);
+            showFileListButton.setBackgroundResource(R.drawable.ic_eye);
+
+            Toast.makeText(this, "Ocultando lista de archivos", Toast.LENGTH_SHORT).show();
         }
     }
     //<-------------show the file list or not
 
+    //------------->save file
+    private void saveFile() {
 
+        if (mDriveServiceHelper != null && mOpenFileId != null) {
+            //Log.d(TAG, "Saving " + mOpenFileId);
+            Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
 
-    /**
-     * Updates the UI to read-only mode.
-     */
+            String fileName = nameDriveFileList.getText().toString();
+            String fileContent = textDriveFileList.getText().toString();
+
+            mDriveServiceHelper.saveFileDrive(mOpenFileId, fileName, fileContent)
+                    .addOnFailureListener(exception ->
+                            Log.e(TAG, "Unable to save file via REST.", exception));
+        }
+
+        saveFileButton.setVisibility(View.GONE);
+        emptyDriveFileList();
+    }
+    //<-------------save file
+
+    //------------->empty EditText
+    private void emptyDriveFileList() {
+
+        nameDriveFileList.getText().clear();
+        textDriveFileList.getText().clear();
+    }
+    //<-------------empty EditText
+
+    //------------->Updates the UI to read-only mode
     private void setReadOnlyMode() {
-        //mFileTitleEditText.setEnabled(false);
+
+        textDriveFileList.setEnabled(false);
         nameDriveFileList.setEnabled(false);
         mOpenFileId = null;
     }
+    //<-------------Updates the UI to read-only mode
 
-    /**
-     * Updates the UI to read/write mode on the document identified by {@code fileId}.
-     */
+    //------------->Updates the UI to read/write mode on the document identified by {@code fileId}
     private void setReadWriteMode(String fileId) {
+
         nameDriveFileList.setEnabled(true);
         textDriveFileList.setEnabled(true);
         mOpenFileId = fileId;
     }
+    //<-------------Updates the UI to read/write mode on the document identified by {@code fileId}
 
     //------------->backButton
     @Override

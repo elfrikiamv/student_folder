@@ -243,4 +243,40 @@ public class DriveServiceHelper {
             return Pair.create(name, content);
         });
     }
+
+    //------------->Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
+    public Task<Void> saveFileDrive(String mOpenFileId, String fileName, String fileContent) {
+        return Tasks.call(mExecutor, () -> {
+
+            // Create a File containing any metadata changes.
+            File metadata = new File().setName(fileName);
+
+            // Convert content to an AbstractInputStreamContent instance.
+            ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", fileContent);
+
+            // Update the metadata and contents.
+            mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
+            return null;
+        });
+    }
+    //<-------------Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
+
+    /**
+     * Updates the file identified by {@code fileId} with the given {@code name} and {@code
+     * content}.
+     */
+    /*public Task<Void> saveFileDrive(String fileId, String name, String content) {
+        return Tasks.call(mExecutor, () -> {
+            // Create a File containing any metadata changes.
+            File metadata = new File().setName(name);
+
+            // Convert content to an AbstractInputStreamContent instance.
+            ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", content);
+
+            // Update the metadata and contents.
+            mDriveService.files().update(fileId, metadata, contentStream).execute();
+            return null;
+        });
+    }*/
+
 }
