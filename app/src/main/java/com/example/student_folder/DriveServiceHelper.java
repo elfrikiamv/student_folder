@@ -217,6 +217,7 @@ public class DriveServiceHelper {
     public Task<Pair<String, String>> openFileUsingStorageAccessFramework(
             ContentResolver contentResolver, Uri uri) {
         return Tasks.call(mExecutor, () -> {
+
             // Retrieve the document's display name from its metadata.
             String name;
             try (Cursor cursor = contentResolver.query(uri, null, null, null, null)) {
@@ -245,7 +246,7 @@ public class DriveServiceHelper {
     }
 
     //------------->Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
-    public Task<Void> saveFileDrive(String mOpenFileId, String fileName, String fileContent) {
+    public Task<String> saveFileDrive(String mOpenFileId, String fileName, String fileContent) {
         return Tasks.call(mExecutor, () -> {
 
             // Create a File containing any metadata changes.
@@ -255,8 +256,16 @@ public class DriveServiceHelper {
             ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", fileContent);
 
             // Update the metadata and contents.
-            mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
-            return null;
+            //mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
+            //return null;
+
+            // Update the metadata and contents.
+            File googleFile = mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
+            if (googleFile == null) {
+                throw new IOException("Null result when requesting file creation.");
+            }
+
+            return googleFile.getId();
         });
     }
     //<-------------Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.

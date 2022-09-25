@@ -176,7 +176,9 @@ public class DriveActivity extends AppCompatActivity {
                 break;
 
             case REQUEST_CODE_OPEN_DOCUMENT:
+
                 if (resultCode == Activity.RESULT_OK && resultData != null) {
+
                     Uri uri = resultData.getData();
                     if (uri != null) {
                         openFileFromFilePicker(uri);
@@ -235,13 +237,19 @@ public class DriveActivity extends AppCompatActivity {
     //------------->Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
     private void openFilePicker() {
         if (mDriveServiceHelper != null) {
-            Log.d(TAG, "Opening file picker.");
-
 
             Intent pickerIntent = mDriveServiceHelper.createFilePickerIntent();
 
             // The result of the SAF Intent is handled in onActivityResult.
             startActivityForResult(pickerIntent, REQUEST_CODE_OPEN_DOCUMENT);
+
+            Log.d(TAG, "Opening file picker.");
+            Toast.makeText(this, "Opening file picker.", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "mDriveServiceHelper is null.", Toast.LENGTH_SHORT).show();
         }
 
         actionMenu.close(true);
@@ -251,8 +259,6 @@ public class DriveActivity extends AppCompatActivity {
     //------------->Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
     private void openFileFromFilePicker(Uri uri) {
         if (mDriveServiceHelper != null) {
-            //Log.d(TAG, "Opening " + uri.getPath());
-            Toast.makeText(this, "Abriendo " + uri.getPath()+"..", Toast.LENGTH_LONG).show();
 
             mDriveServiceHelper.openFileUsingStorageAccessFramework(getContentResolver(), uri)
                     .addOnSuccessListener(nameAndContent -> {
@@ -262,11 +268,20 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
                         nameDriveFileList.setEnabled(false);
-                        saveFileButton.setVisibility(View.VISIBLE);
+                        //saveFileButton.setVisibility(View.VISIBLE);
 
+                        Log.d(TAG, "Opening " + uri.getPath());
+                        Toast.makeText(this, "Abriendo " + uri.getPath(), Toast.LENGTH_LONG).show();
                     })
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to open file from picker.", exception));
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Unable to open file from picker.", exception);
+                        Toast.makeText(this, "No se pudo abrir el archivo", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "mDriveServiceHelper is null.", Toast.LENGTH_SHORT).show();
         }
     }
     //<-------------Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
@@ -310,6 +325,7 @@ public class DriveActivity extends AppCompatActivity {
             String fileContent = textDriveFileList.getText().toString();
 
             if (fileName.isEmpty() || fileContent.isEmpty()) {
+
                 Toast.makeText(this, "El nombre y el contenido del archivo no pueden estar vacíos.", Toast.LENGTH_LONG).show();
             } else {
 
@@ -317,9 +333,16 @@ public class DriveActivity extends AppCompatActivity {
 
                 mDriveServiceHelper.createFileTxt(fileName, fileContent)
                         .addOnSuccessListener(fileId ->  readFile(fileId))
-                        .addOnFailureListener(exception ->
-                                Log.e(TAG, "Couldn't create file.", exception));
+                        .addOnFailureListener(exception -> {
+
+                            Log.e(TAG, "Couldn't create file.", exception);
+                            Toast.makeText(this, "No se pudo crear el archivo.", Toast.LENGTH_LONG).show();
+                        });
             }
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No se pudo crear el archivo.", Toast.LENGTH_SHORT).show();
         }
 
         actionMenu.close(true);
@@ -344,10 +367,17 @@ public class DriveActivity extends AppCompatActivity {
                         // Enable file saving now that a file is open.
                         setReadWriteMode(fileId);
                     })
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to read file.", exception));
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Imposible leer el archivo.", exception);
+                        Toast.makeText(this, "No se pudo leer el archivo.", Toast.LENGTH_SHORT).show();
+                    });
 
             saveFileButton.setVisibility(View.VISIBLE);
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No se pudo leer el archivo.", Toast.LENGTH_SHORT).show();
         }
     }
     //<-------------Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
@@ -396,7 +426,7 @@ public class DriveActivity extends AppCompatActivity {
                     .addOnSuccessListener(fileList -> {
                         StringBuilder builder = new StringBuilder();
                         for (File file : fileList.getFiles()) {
-                            builder.append(file.getName()).append("\n");
+                            builder.append(file.getName() + file.getId()).append("\n");
                         }
                         String fileNames = builder.toString();
 
@@ -404,7 +434,15 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setEnabled(false);
                         textDriveFileList.setText(fileNames);
                     })
-                    .addOnFailureListener(exception -> Log.e(TAG, "Unable to query files.", exception));
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Unable to query files.", exception);
+                        Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_LONG).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_SHORT).show();
         }
 
         return;
@@ -439,17 +477,28 @@ public class DriveActivity extends AppCompatActivity {
 
         if (mDriveServiceHelper != null && mOpenFileId != null) {
             //Log.d(TAG, "Saving " + mOpenFileId);
-            Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Guardando archivo", Toast.LENGTH_SHORT).show();
 
             String fileName = nameDriveFileList.getText().toString();
             String fileContent = textDriveFileList.getText().toString();
 
             mDriveServiceHelper.saveFileDrive(mOpenFileId, fileName, fileContent)
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to save file via REST.", exception));
+                    .addOnSuccessListener(fileId -> {
+                        readFile(fileId);
+                    })
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "No se puede guardar el archivo a través de REST.", exception);
+                        Toast.makeText(this, "No se pudo guardar el archivo.", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No hay archivo abierto", Toast.LENGTH_SHORT).show();
         }
 
         saveFileButton.setVisibility(View.GONE);
+        nameDriveFileList.setEnabled(true);
         emptyDriveFileList();
     }
     //<-------------save file
@@ -474,7 +523,7 @@ public class DriveActivity extends AppCompatActivity {
     //------------->Updates the UI to read/write mode on the document identified by {@code fileId}
     private void setReadWriteMode(String fileId) {
 
-        nameDriveFileList.setEnabled(true);
+        nameDriveFileList.setEnabled(false);
         textDriveFileList.setEnabled(true);
         mOpenFileId = fileId;
     }
