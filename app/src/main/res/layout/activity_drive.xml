@@ -43,13 +43,23 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/imgButton"
+            android:id="@+id/btn_showFiles"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="12dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_eye">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
             android:id="@+id/btn_saveFileOpenDrive"
             android:visibility="gone"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_save">
+            android:background="@drawable/ic_disk">
         </androidx.appcompat.widget.AppCompatImageButton>
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -60,17 +70,18 @@
             android:layout_height="24dp"
             android:layout_margin="12dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_save">
+            android:background="@drawable/ic_disk">
         </androidx.appcompat.widget.AppCompatImageButton>
 
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/imgButton"
-            android:id="@+id/btn_showFiles"
+            android:id="@+id/btn_closeFile"
+            android:visibility="gone"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_eye">
+            android:background="@drawable/ic_cross">
         </androidx.appcompat.widget.AppCompatImageButton>
     </LinearLayout>
 

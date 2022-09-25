@@ -62,6 +62,10 @@ public class DriveActivity extends AppCompatActivity {
     public ImageButton showFileListButton;
     //<-------------save file button
 
+    //------------->close file button
+    public ImageButton closeFileButton;
+    //<-------------close file button
+
     //------------->create File Txt Button
     public FloatingActionButton createFileTxtButton;
     //<-------------create File Txt Button
@@ -118,6 +122,11 @@ public class DriveActivity extends AppCompatActivity {
         saveFileOpenDriveButton = findViewById(R.id.btn_saveFileOpenDrive);
         saveFileOpenDriveButton.setOnClickListener(view -> saveFileOpenDrive());
         //<-------------save file button openFileFromFilePicker
+
+        //------------->close file button
+        closeFileButton = findViewById(R.id.btn_closeFile);
+        closeFileButton.setOnClickListener(view -> closeFile());
+        //<-------------close file button
 
         //------------->floating menu
         actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
@@ -217,8 +226,8 @@ public class DriveActivity extends AppCompatActivity {
     //------------->Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
     private void openFilePicker() {
 
-        //hide save buttons
-        hideSaveButton();
+        //hide buttons
+        hideButtons();
         //limpia los campos
         emptyDriveFileList();
 
@@ -255,8 +264,10 @@ public class DriveActivity extends AppCompatActivity {
                         textDriveFileList.setText(content);
                         nameDriveFileList.setEnabled(false);
 
-                        //saveFileOpenDrive();
+                        //muiestra el boton de guardar el archivo
                         saveFileOpenDriveButton.setVisibility(View.VISIBLE);
+                        //muestra el boton de cerrar el archivo
+                        closeFileButton.setVisibility(View.VISIBLE);
 
                         Log.d(TAG, "Opening " + uri.getLastPathSegment());
                         Toast.makeText(this, "Abriendo " + uri.getLastPathSegment(), Toast.LENGTH_LONG).show();
@@ -277,14 +288,11 @@ public class DriveActivity extends AppCompatActivity {
     //------------->create file
     private void createFileTxt() {
 
-        //hide save buttons
-        hideSaveButton();
-        //limpia los campos
-        //emptyDriveFileList();
+        //hide buttons
+        hideButtons();
 
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Creating a file txt.");
-            //Toast.makeText(this, "Creando archivo...", Toast.LENGTH_LONG).show();
 
             String fileName = nameDriveFileList.getText().toString();
             String fileContent = textDriveFileList.getText().toString();
@@ -297,7 +305,11 @@ public class DriveActivity extends AppCompatActivity {
                 Toast.makeText(this, "Creando archivo", Toast.LENGTH_SHORT).show();
 
                 mDriveServiceHelper.createFileTxt(fileName, fileContent)
-                        .addOnSuccessListener(fileId ->  readFile(fileId))
+                        .addOnSuccessListener(fileId -> {
+
+                            emptyDriveFileList();
+                            readFile(fileId);
+                        })
                         .addOnFailureListener(exception -> {
 
                             Log.e(TAG, "Couldn't create file.", exception);
@@ -329,8 +341,10 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
 
-                        //muestrs el boton de guardar el archivo
+                        //muestra el boton de guardar el archivo
                         saveFileButton.setVisibility(View.VISIBLE);
+                        //muestra el boton de cerrar el archivo
+                        closeFileButton.setVisibility(View.VISIBLE);
 
                         // Enable file saving now that a file is open.
                         setReadWriteMode(fileId);
@@ -386,10 +400,8 @@ public class DriveActivity extends AppCompatActivity {
     //------------->show the file list or not
     private void showFiles() {
 
-        //hide save buttons
-        hideSaveButton();
-        //limpia los campos
-        //emptyDriveFileList();
+        //hide buttons
+        hideButtons();
 
         String nameEditText = nameDriveFileList.getText().toString().trim();
 
@@ -515,11 +527,13 @@ public class DriveActivity extends AppCompatActivity {
     //<-------------save file from openFileFromFilePicker google drive
 
     //------------->hide the save file button
-    private void hideSaveButton() {
+    private void hideButtons() {
 
         //hide save buttons
         saveFileButton.setVisibility(View.GONE);
         saveFileOpenDriveButton.setVisibility(View.GONE);
+        //hide close button
+        closeFileButton.setVisibility(View.GONE);
     }
     //<-------------hide the save file button
 
@@ -533,6 +547,28 @@ public class DriveActivity extends AppCompatActivity {
         textDriveFileList.setEnabled(true);
     }
     //<-------------empty EditText
+
+    //------------->close the file
+    private void closeFile() {
+
+        if (mOpenFileId != null) {
+
+            mOpenFileId = null;
+            emptyDriveFileList();
+            hideButtons();
+
+            Log.d(TAG, "Closed file.");
+            Toast.makeText(this, "Archivo cerrado", Toast.LENGTH_SHORT).show();
+        } else {
+
+            emptyDriveFileList();
+            hideButtons();
+
+            Log.d(TAG, "No file open.");
+            Toast.makeText(this, "No hay archivo abierto", Toast.LENGTH_SHORT).show();
+        }
+    }
+    //<-------------close the file
 
     //------------->Updates the UI to read-only mode
     private void setReadOnlyMode() {
