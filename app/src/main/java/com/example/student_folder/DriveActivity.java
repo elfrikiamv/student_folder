@@ -89,41 +89,10 @@ public class DriveActivity extends AppCompatActivity {
         });
         //<-------------backButton
 
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        //nav
-
-        /*Toolbar toolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);*/
-
-
-
-        /*
-        //fondiwis
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear_drive);
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
-
-        animationDrawable.setEnterFadeDuration(2500);
-        animationDrawable.setExitFadeDuration(5000);
-        animationDrawable.start();
-        //fondiwis
-
-         */
-
-        // Store the EditText boxes to be updated when files are opened/created/modified.
-        //mFileTitleEditText = findViewById(R.id.file_title_edittext);
-        //mDocContentEditText = findViewById(R.id.doc_content_edittext);
-
         //---------------->Store the EditText boxes to be updated when files are opened/created/modified.
         nameDriveFileList = findViewById(R.id.et_nameFileList);
         textDriveFileList = findViewById(R.id.et_textFileList);
         //<----------------Store the EditText boxes to be updated when files are opened/created/modified.
-
-        // Set the onClick listeners for the button bar.
-        /*findViewById(R.id.open_btn).setOnClickListener(view -> openFilePicker());
-        findViewById(R.id.create_btn).setOnClickListener(view -> createFile());
-        findViewById(R.id.menu_file_pdf).setOnClickListener(view -> saveFilePdf());
-        findViewById(R.id.menu_file_txt).setOnClickListener(view -> saveFileTxt());
-        findViewById(R.id.menu_file_docx).setOnClickListener(view -> saveFileRtf());*/
 
         //---------------->floating button crear .txt en drive
         createFileTxtButton = findViewById(R.id.btn_createFileTxt);
@@ -247,6 +216,12 @@ public class DriveActivity extends AppCompatActivity {
 
     //------------->Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
     private void openFilePicker() {
+
+        //hide save buttons
+        hideSaveButton();
+        //limpia los campos
+        emptyDriveFileList();
+
         if (mDriveServiceHelper != null) {
 
             Intent pickerIntent = mDriveServiceHelper.createFilePickerIntent();
@@ -299,36 +274,13 @@ public class DriveActivity extends AppCompatActivity {
     }
     //<-------------Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
 
-    /**
-     * Creates a new file via the Drive REST API.
-     */
-    /*private void createFile() {
-        if (mDriveServiceHelper != null) {
-            //Log.d(TAG, "Creating a file.");
-            Toast.makeText(this, "Creando archivo...", Toast.LENGTH_LONG).show();
-
-            mDriveServiceHelper.createFile()
-                    .addOnSuccessListener(fileId -> readFile(fileId))
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Couldn't create file.", exception));
-                            //Toast.makeText(this, "Couldn't create file.", exception+"..", Toast.LENGTH_LONG).show();
-        }
-    }*/
-
-    /*if (mDriveServiceHelper != null && mOpenFileId != null) {
-            //Log.d(TAG, "Saving " + mOpenFileId);
-            Toast.makeText(this, "Guardando..." + mOpenFileId+"..", Toast.LENGTH_SHORT).show();
-
-            //String fileName = nameDriveFileList.getText().toString();
-            //String fileContent = textDriveFileList.getText().toString();
-
-            mDriveServiceHelper.saveFileTxt(mOpenFileId, fileName, fileContent)
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to save file via REST.", exception));
-        }*/
-
     //------------->create file
     private void createFileTxt() {
+
+        //hide save buttons
+        hideSaveButton();
+        //limpia los campos
+        //emptyDriveFileList();
 
         if (mDriveServiceHelper != null) {
             Log.d(TAG, "Creating a file txt.");
@@ -337,7 +289,7 @@ public class DriveActivity extends AppCompatActivity {
             String fileName = nameDriveFileList.getText().toString();
             String fileContent = textDriveFileList.getText().toString();
 
-            if (fileName.isEmpty() || fileContent.isEmpty()) {
+            if (fileName.isEmpty() && fileContent.isEmpty()) {
 
                 Toast.makeText(this, "El nombre y el contenido del archivo no pueden estar vacíos.", Toast.LENGTH_LONG).show();
             } else {
@@ -377,6 +329,9 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
 
+                        //muestrs el boton de guardar el archivo
+                        saveFileButton.setVisibility(View.VISIBLE);
+
                         // Enable file saving now that a file is open.
                         setReadWriteMode(fileId);
                     })
@@ -386,7 +341,6 @@ public class DriveActivity extends AppCompatActivity {
                         Toast.makeText(this, "No se pudo leer el archivo.", Toast.LENGTH_SHORT).show();
                     });
 
-            saveFileButton.setVisibility(View.VISIBLE);
         } else {
 
             Log.e(TAG, "mDriveServiceHelper is null.");
@@ -394,39 +348,6 @@ public class DriveActivity extends AppCompatActivity {
         }
     }
     //<-------------Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
-
-    /**
-     * Saves the currently opened file created via {@link #createFile()} if one exists.
-     */
-   /* private void saveFilePdf() {
-        if (mDriveServiceHelper != null && mOpenFileId != null) {
-            //Log.d(TAG, "Saving " + mOpenFileId);
-            Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
-
-            String fileName = nameDriveFileList.getText().toString();
-            String fileContent = textDriveFileList.getText().toString();
-
-            mDriveServiceHelper.saveFilePdf(mOpenFileId, fileName, fileContent)
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to save file via REST.", exception));
-        }
-        actionMenu.close(true);
-    }
-
-    private void saveFileRtf() {
-        if (mDriveServiceHelper != null && mOpenFileId != null) {
-            //Log.d(TAG, "Saving " + mOpenFileId);
-            Toast.makeText(this, "Guardando.." + mOpenFileId+"..", Toast.LENGTH_LONG).show();
-
-            String fileName = nameDriveFileList.getText().toString();
-            String fileContent = textDriveFileList.getText().toString();
-
-            mDriveServiceHelper.saveFileRtf(mOpenFileId, fileName, fileContent)
-                    .addOnFailureListener(exception ->
-                            Log.e(TAG, "Unable to save file via REST.", exception));
-        }
-        actionMenu.close(true);
-    }*/
 
     //------------->Queries the Drive REST API for files visible to this app and lists them in the content view
     private void queryFiles() {
@@ -439,7 +360,7 @@ public class DriveActivity extends AppCompatActivity {
                     .addOnSuccessListener(fileList -> {
                         StringBuilder builder = new StringBuilder();
                         for (File file : fileList.getFiles()) {
-                            builder.append(file.getName() + file.getId()).append("\n");
+                            builder.append(file.getName()).append("\n");
                         }
                         String fileNames = builder.toString();
 
@@ -465,6 +386,11 @@ public class DriveActivity extends AppCompatActivity {
     //------------->show the file list or not
     private void showFiles() {
 
+        //hide save buttons
+        hideSaveButton();
+        //limpia los campos
+        //emptyDriveFileList();
+
         String nameEditText = nameDriveFileList.getText().toString().trim();
 
         if (nameEditText.isEmpty()) {
@@ -476,7 +402,7 @@ public class DriveActivity extends AppCompatActivity {
         } else {
 
             emptyDriveFileList();
-            nameDriveFileList.setEnabled(true);
+            //nameDriveFileList.setEnabled(true);
 
             showFileListButton.setBackgroundResource(R.drawable.ic_eye);
 
@@ -497,7 +423,12 @@ public class DriveActivity extends AppCompatActivity {
 
             mDriveServiceHelper.saveFileCreateDrive(mOpenFileId, fileName, fileContent)
                     .addOnSuccessListener(fileId -> {
+
+                        //ejecuta el metodo para leer el archivo con el id del archivo
                         readFile(fileId);
+
+                        //ocultar el boton de guardar el archivo
+                        saveFileButton.setVisibility(View.GONE);
                     })
                     .addOnFailureListener(exception -> {
 
@@ -510,8 +441,7 @@ public class DriveActivity extends AppCompatActivity {
             Toast.makeText(this, "No hay archivo abierto", Toast.LENGTH_SHORT).show();
         }
 
-        saveFileButton.setVisibility(View.GONE);
-        nameDriveFileList.setEnabled(true);
+        //nameDriveFileList.setEnabled(true);
         emptyDriveFileList();
     }
     //<-------------save newly created file
@@ -584,11 +514,23 @@ public class DriveActivity extends AppCompatActivity {
     }
     //<-------------save file from openFileFromFilePicker google drive
 
+    //------------->hide the save file button
+    private void hideSaveButton() {
+
+        //hide save buttons
+        saveFileButton.setVisibility(View.GONE);
+        saveFileOpenDriveButton.setVisibility(View.GONE);
+    }
+    //<-------------hide the save file button
+
     //------------->empty EditText
     private void emptyDriveFileList() {
 
         nameDriveFileList.getText().clear();
         textDriveFileList.getText().clear();
+
+        nameDriveFileList.setEnabled(true);
+        textDriveFileList.setEnabled(true);
     }
     //<-------------empty EditText
 

@@ -255,12 +255,9 @@ public class DriveServiceHelper {
             ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", fileContent);
 
             // Update the metadata and contents.
-            //mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
-            //return null;
-
-            // Update the metadata and contents.
             File googleFile = mDriveService.files().update(mOpenFileId, metadata, contentStream).execute();
             if (googleFile == null) {
+
                 throw new IOException("Null result when requesting file creation.");
             }
 
