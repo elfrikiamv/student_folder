@@ -18,12 +18,11 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -246,7 +245,7 @@ public class DriveServiceHelper {
     }
 
     //------------->Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
-    public Task<String> saveFileDrive(String mOpenFileId, String fileName, String fileContent) {
+    public Task<String> saveFileCreateDrive(String mOpenFileId, String fileName, String fileContent) {
         return Tasks.call(mExecutor, () -> {
 
             // Create a File containing any metadata changes.
@@ -268,6 +267,29 @@ public class DriveServiceHelper {
             return googleFile.getId();
         });
     }
+
+    //---------------->get the id of the file through its name
+    public Task<String> saveFileOpenDrive(String name) {
+
+        return Tasks.call(mExecutor, () -> {
+
+            // Create a File containing any metadata changes.
+            mDriveService.files().list().setSpaces("drive").execute();
+            FileList result = mDriveService.files().list()
+                    .setQ("name = '" + name + "'")
+                    .setSpaces("drive")
+                    .execute();
+
+            List<File> files = result.getFiles();
+            if (files != null && files.size() > 0) {
+                return files.get(0).getId();
+            } else {
+                return null;
+            }
+        });
+    }
+    //<----------------get the id of the file through its name
+
     //<-------------Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
 
     /**

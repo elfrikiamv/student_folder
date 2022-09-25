@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +27,9 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Collections;
 
 
@@ -51,6 +53,10 @@ public class DriveActivity extends AppCompatActivity {
     //------------->save file button
     public ImageButton saveFileButton;
     //<-------------save file button
+
+    //------------->save file button openFileFromFilePicker
+    public ImageButton saveFileOpenDriveButton;
+    //<-------------save file button openFileFromFilePicker
 
     //------------->save file button
     public ImageButton showFileListButton;
@@ -136,8 +142,13 @@ public class DriveActivity extends AppCompatActivity {
 
         //------------->button save the file
         saveFileButton = findViewById(R.id.btn_saveFile);
-        saveFileButton.setOnClickListener(view -> saveFile());
+        saveFileButton.setOnClickListener(view -> saveFileCreate());
         //<-------------button save the file
+
+        //------------->save file button openFileFromFilePicker
+        saveFileOpenDriveButton = findViewById(R.id.btn_saveFileOpenDrive);
+        saveFileOpenDriveButton.setOnClickListener(view -> saveFileOpenDrive());
+        //<-------------save file button openFileFromFilePicker
 
         //------------->floating menu
         actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
@@ -268,10 +279,12 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
                         nameDriveFileList.setEnabled(false);
-                        //saveFileButton.setVisibility(View.VISIBLE);
 
-                        Log.d(TAG, "Opening " + uri.getPath());
-                        Toast.makeText(this, "Abriendo " + uri.getPath(), Toast.LENGTH_LONG).show();
+                        //saveFileOpenDrive();
+                        saveFileOpenDriveButton.setVisibility(View.VISIBLE);
+
+                        Log.d(TAG, "Opening " + uri.getLastPathSegment());
+                        Toast.makeText(this, "Abriendo " + uri.getLastPathSegment(), Toast.LENGTH_LONG).show();
                     })
                     .addOnFailureListener(exception -> {
 
@@ -472,8 +485,8 @@ public class DriveActivity extends AppCompatActivity {
     }
     //<-------------show the file list or not
 
-    //------------->save file
-    private void saveFile() {
+    //------------->save newly created file
+    private void saveFileCreate() {
 
         if (mDriveServiceHelper != null && mOpenFileId != null) {
             //Log.d(TAG, "Saving " + mOpenFileId);
@@ -482,7 +495,7 @@ public class DriveActivity extends AppCompatActivity {
             String fileName = nameDriveFileList.getText().toString();
             String fileContent = textDriveFileList.getText().toString();
 
-            mDriveServiceHelper.saveFileDrive(mOpenFileId, fileName, fileContent)
+            mDriveServiceHelper.saveFileCreateDrive(mOpenFileId, fileName, fileContent)
                     .addOnSuccessListener(fileId -> {
                         readFile(fileId);
                     })
@@ -501,7 +514,75 @@ public class DriveActivity extends AppCompatActivity {
         nameDriveFileList.setEnabled(true);
         emptyDriveFileList();
     }
-    //<-------------save file
+    //<-------------save newly created file
+
+    //------------->save file from openFileFromFilePicker google drive
+    private void saveFileOpenDrive() {
+
+        if (mDriveServiceHelper != null) {
+            Log.d(TAG, "Querying for files.");
+
+            mDriveServiceHelper.queryFiles()
+                    .addOnSuccessListener(fileList -> {
+
+                        //obtiene el file list de queryFiles() y lo guarda en un String
+                        StringBuilder builder = new StringBuilder();
+                        for (File file : fileList.getFiles()) {
+
+                            builder.append(file.getName() + file.getId()).append("\n");
+                        }
+                        String fileNames = builder.toString();
+
+                        //leé el file list line apor linea
+                        try (BufferedReader br = new BufferedReader(new StringReader(fileNames))) {
+
+                            String lineFileList;
+                            while ((lineFileList = br.readLine()) != null) {
+
+                                //jala el nombre del archivo que esta en el edittext nameDriveFileList
+                                String fileName = nameDriveFileList.getText().toString();
+
+                                //busca comparaciones entre el nombre del archivo y el nombre del archivo en el file list
+                                if (lineFileList.contains(fileName)) {
+                                    //System.out.println("It is true");
+
+                                    String fileId = lineFileList.replaceFirst(fileName, "");
+                                    System.out.println(fileId);
+
+                                    mOpenFileId = fileId;
+                                    saveFileCreate();
+
+                                    break;
+                                } else {
+                                    System.out.println("It is false");
+                                }
+                            }
+                        } catch (IOException e) {
+
+                            e.printStackTrace();
+                        }
+
+                        emptyDriveFileList();
+                        /*nameDriveFileList.setText("Lista de archivos");
+                        nameDriveFileList.setEnabled(false);
+                        textDriveFileList.setText(fileNames);*/
+                    })
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Unable to query files.", exception);
+                        Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_LONG).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_SHORT).show();
+        }
+
+        saveFileOpenDriveButton.setVisibility(View.GONE);
+        nameDriveFileList.setEnabled(true);
+        return;
+    }
+    //<-------------save file from openFileFromFilePicker google drive
 
     //------------->empty EditText
     private void emptyDriveFileList() {
