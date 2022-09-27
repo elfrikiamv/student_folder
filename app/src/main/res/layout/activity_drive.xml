@@ -53,6 +53,17 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/imgButton"
+            android:id="@+id/btn_deleteFile"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="12dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_trash">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
             android:id="@+id/btn_saveFileOpenDrive"
             android:visibility="gone"
             android:layout_width="24dp"

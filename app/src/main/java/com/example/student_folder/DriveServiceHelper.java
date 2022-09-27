@@ -264,30 +264,40 @@ public class DriveServiceHelper {
             return googleFile.getId();
         });
     }
+    //<-------------Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
 
     //---------------->get the id of the file through its name
-    public Task<String> saveFileOpenDrive(String name) {
+    public Task<String> getIdForName(String fileName) {
 
         return Tasks.call(mExecutor, () -> {
 
             // Create a File containing any metadata changes.
             mDriveService.files().list().setSpaces("drive").execute();
             FileList result = mDriveService.files().list()
-                    .setQ("name = '" + name + "'")
+                    .setQ("name = '" + fileName + "'")
                     .setSpaces("drive")
                     .execute();
 
             List<File> files = result.getFiles();
             if (files != null && files.size() > 0) {
+
                 return files.get(0).getId();
             } else {
+
                 return null;
             }
         });
     }
     //<----------------get the id of the file through its name
 
-    //<-------------Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
+    public Task<String> deleteFile(String mOpenFileId) {
+
+        return Tasks.call(mExecutor, () -> {
+
+            mDriveService.files().delete(mOpenFileId).execute();
+            return null;
+        });
+    }
 
     /**
      * Updates the file identified by {@code fileId} with the given {@code name} and {@code

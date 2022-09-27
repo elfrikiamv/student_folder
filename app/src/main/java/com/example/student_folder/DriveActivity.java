@@ -66,6 +66,10 @@ public class DriveActivity extends AppCompatActivity {
     public ImageButton closeFileButton;
     //<-------------close file button
 
+    //------------->delete file button
+    public ImageButton deleteFileButton;
+    //<-------------delete file button
+
     //------------->create File Txt Button
     public FloatingActionButton createFileTxtButton;
     //<-------------create File Txt Button
@@ -115,18 +119,23 @@ public class DriveActivity extends AppCompatActivity {
 
         //------------->button save the file
         saveFileButton = findViewById(R.id.btn_saveFile);
-        saveFileButton.setOnClickListener(view -> saveFileCreate());
+        saveFileButton.setOnClickListener(view -> saveFileId());
         //<-------------button save the file
 
         //------------->save file button openFileFromFilePicker
         saveFileOpenDriveButton = findViewById(R.id.btn_saveFileOpenDrive);
-        saveFileOpenDriveButton.setOnClickListener(view -> saveFileOpenDrive());
+        saveFileOpenDriveButton.setOnClickListener(view -> saveFilePickerDrive());
         //<-------------save file button openFileFromFilePicker
 
         //------------->close file button
         closeFileButton = findViewById(R.id.btn_closeFile);
-        closeFileButton.setOnClickListener(view -> closeFile());
+        closeFileButton.setOnClickListener(view -> closeFileId());
         //<-------------close file button
+
+        //------------->delete file button
+        deleteFileButton = findViewById(R.id.btn_deleteFile);
+        deleteFileButton.setOnClickListener(view -> deleteFileId());
+        //<-------------delete file button
 
         //------------->floating menu
         actionMenu = (FloatingActionMenu) findViewById(R.id.menuDriveFile);
@@ -268,6 +277,8 @@ public class DriveActivity extends AppCompatActivity {
                         saveFileOpenDriveButton.setVisibility(View.VISIBLE);
                         //muestra el boton de cerrar el archivo
                         closeFileButton.setVisibility(View.VISIBLE);
+                        //muestra el boton de eliminar el archivo
+                        //deleteFileButton.setVisibility(View.VISIBLE);
 
                         Log.d(TAG, "Opening " + uri.getLastPathSegment());
                         Toast.makeText(this, "Abriendo " + uri.getLastPathSegment(), Toast.LENGTH_LONG).show();
@@ -308,7 +319,7 @@ public class DriveActivity extends AppCompatActivity {
                         .addOnSuccessListener(fileId -> {
 
                             emptyDriveFileList();
-                            readFile(fileId);
+                            readFileId(fileId);
                         })
                         .addOnFailureListener(exception -> {
 
@@ -327,7 +338,7 @@ public class DriveActivity extends AppCompatActivity {
     //------------->create file
 
     //------------->Retrieves the title and content of a file identified by {@code fileId} and populates the UI.
-    private void readFile(String fileId) {
+    private void readFileId(String fileId) {
         if (mDriveServiceHelper != null) {
 
             Toast.makeText(this, "Leyendo " + fileId+"..", Toast.LENGTH_SHORT).show();
@@ -341,10 +352,7 @@ public class DriveActivity extends AppCompatActivity {
                         nameDriveFileList.setText(name);
                         textDriveFileList.setText(content);
 
-                        //muestra el boton de guardar el archivo
-                        saveFileButton.setVisibility(View.VISIBLE);
-                        //muestra el boton de cerrar el archivo
-                        closeFileButton.setVisibility(View.VISIBLE);
+                        showButtons();
 
                         // Enable file saving now that a file is open.
                         setReadWriteMode(fileId);
@@ -424,7 +432,7 @@ public class DriveActivity extends AppCompatActivity {
     //<-------------show the file list or not
 
     //------------->save newly created file
-    private void saveFileCreate() {
+    private void saveFileId() {
 
         if (mDriveServiceHelper != null && mOpenFileId != null) {
             //Log.d(TAG, "Saving " + mOpenFileId);
@@ -437,7 +445,7 @@ public class DriveActivity extends AppCompatActivity {
                     .addOnSuccessListener(fileId -> {
 
                         //ejecuta el metodo para leer el archivo con el id del archivo
-                        readFile(fileId);
+                        readFileId(fileId);
 
                         //ocultar el boton de guardar el archivo
                         saveFileButton.setVisibility(View.GONE);
@@ -454,102 +462,54 @@ public class DriveActivity extends AppCompatActivity {
         }
 
         //nameDriveFileList.setEnabled(true);
+        hideButtons();
         emptyDriveFileList();
     }
     //<-------------save newly created file
 
     //------------->save file from openFileFromFilePicker google drive
-    private void saveFileOpenDrive() {
+    private void saveFilePickerDrive() {
 
         if (mDriveServiceHelper != null) {
-            Log.d(TAG, "Querying for files.");
+            //Log.d(TAG, "Saving " + mOpenFileId);
 
-            mDriveServiceHelper.queryFiles()
-                    .addOnSuccessListener(fileList -> {
+            String fileName = nameDriveFileList.getText().toString();
 
-                        //obtiene el file list de queryFiles() y lo guarda en un String
-                        StringBuilder builder = new StringBuilder();
-                        for (File file : fileList.getFiles()) {
+            mDriveServiceHelper.getIdForName(fileName)
+                    .addOnSuccessListener(fileId -> {
 
-                            builder.append(file.getName() + file.getId()).append("\n");
+                        if (fileId != null) {
+
+                            //ocultar los botones
+                            hideButtons();
+
+                            System.out.println("fileId: " + fileId);
+                            Toast.makeText(this, "Guardando archivo.", Toast.LENGTH_SHORT).show();
+
+                            //set the id of the file
+                            mOpenFileId = fileId;
+
+                            //ejecuta el metodo para guardar el archivo
+                            saveFileId();
+                        } else {
+                            Toast.makeText(this, "No se pudo guardar el archivo.", Toast.LENGTH_SHORT).show();
                         }
-                        String fileNames = builder.toString();
-
-                        //leé el file list line apor linea
-                        try (BufferedReader br = new BufferedReader(new StringReader(fileNames))) {
-
-                            String lineFileList;
-                            while ((lineFileList = br.readLine()) != null) {
-
-                                //jala el nombre del archivo que esta en el edittext nameDriveFileList
-                                String fileName = nameDriveFileList.getText().toString();
-
-                                //busca comparaciones entre el nombre del archivo y el nombre del archivo en el file list
-                                if (lineFileList.contains(fileName)) {
-                                    //System.out.println("It is true");
-
-                                    String fileId = lineFileList.replaceFirst(fileName, "");
-                                    System.out.println(fileId);
-
-                                    mOpenFileId = fileId;
-                                    saveFileCreate();
-
-                                    break;
-                                } else {
-                                    System.out.println("It is false");
-                                }
-                            }
-                        } catch (IOException e) {
-
-                            e.printStackTrace();
-                        }
-
-                        emptyDriveFileList();
-                        /*nameDriveFileList.setText("Lista de archivos");
-                        nameDriveFileList.setEnabled(false);
-                        textDriveFileList.setText(fileNames);*/
                     })
                     .addOnFailureListener(exception -> {
 
-                        Log.e(TAG, "Unable to query files.", exception);
-                        Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "No se puede guardar el archivo a través de REST.", exception);
+                        Toast.makeText(this, "No se pudo guardar el archivo.", Toast.LENGTH_SHORT).show();
                     });
         } else {
 
             Log.e(TAG, "mDriveServiceHelper is null.");
-            Toast.makeText(this, "No se pudo consultar los archivos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No hay archivo abierto", Toast.LENGTH_SHORT).show();
         }
-
-        saveFileOpenDriveButton.setVisibility(View.GONE);
-        nameDriveFileList.setEnabled(true);
-        return;
     }
     //<-------------save file from openFileFromFilePicker google drive
 
-    //------------->hide the save file button
-    private void hideButtons() {
-
-        //hide save buttons
-        saveFileButton.setVisibility(View.GONE);
-        saveFileOpenDriveButton.setVisibility(View.GONE);
-        //hide close button
-        closeFileButton.setVisibility(View.GONE);
-    }
-    //<-------------hide the save file button
-
-    //------------->empty EditText
-    private void emptyDriveFileList() {
-
-        nameDriveFileList.getText().clear();
-        textDriveFileList.getText().clear();
-
-        nameDriveFileList.setEnabled(true);
-        textDriveFileList.setEnabled(true);
-    }
-    //<-------------empty EditText
-
     //------------->close the file
-    private void closeFile() {
+    private void closeFileId() {
 
         if (mOpenFileId != null) {
 
@@ -569,6 +529,80 @@ public class DriveActivity extends AppCompatActivity {
         }
     }
     //<-------------close the file
+
+    //------------->delete the file
+    private void deleteFileId() {
+
+        if (mDriveServiceHelper != null && mOpenFileId != null) {
+            //Log.d(TAG, "Deleting " + mOpenFileId);
+            Toast.makeText(this, "Eliminando archivo", Toast.LENGTH_SHORT).show();
+
+            mDriveServiceHelper.deleteFile(mOpenFileId)
+                    .addOnSuccessListener(aVoid -> {
+
+                        if (aVoid == null) {
+
+                            //ejecuta el metodo para cerrar el archivo
+                            closeFileId();
+
+                            Toast.makeText(this, "Archivo eliminado", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Toast.makeText(this, "No se pudo eliminar el archivo.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Unable to delete file.", exception);
+                        Toast.makeText(this, "No se pudo eliminar el archivo.", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "No hay archivo abierto", Toast.LENGTH_SHORT).show();
+        }
+
+        emptyDriveFileList();
+        hideButtons();
+    }
+    //<-------------delete the file
+
+    //------------->show buttons
+    private void showButtons() {
+
+        //muestra el boton de guardar el archivo
+        saveFileButton.setVisibility(View.VISIBLE);
+        //muestra el boton de cerrar el archivo
+        closeFileButton.setVisibility(View.VISIBLE);
+        //muestra el boton de eliminar el archivo
+        deleteFileButton.setVisibility(View.VISIBLE);
+    }
+    //<-------------show buttons
+
+    //------------->hide the save file button
+    private void hideButtons() {
+
+        //hide save buttons
+        saveFileButton.setVisibility(View.GONE);
+        saveFileOpenDriveButton.setVisibility(View.GONE);
+        //hide close button
+        closeFileButton.setVisibility(View.GONE);
+        //hide delete button
+        deleteFileButton.setVisibility(View.GONE);
+    }
+    //<-------------hide the save file button
+
+    //------------->empty EditText
+    private void emptyDriveFileList() {
+
+        nameDriveFileList.getText().clear();
+        textDriveFileList.getText().clear();
+
+        nameDriveFileList.setEnabled(true);
+        textDriveFileList.setEnabled(true);
+    }
+    //<-------------empty EditText
+
 
     //------------->Updates the UI to read-only mode
     private void setReadOnlyMode() {
