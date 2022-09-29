@@ -27,10 +27,8 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class DriveActivity extends AppCompatActivity {
@@ -260,8 +258,47 @@ public class DriveActivity extends AppCompatActivity {
     }
     //<-------------Opens the Storage Access Framework file picker using {@link #REQUEST_CODE_OPEN_DOCUMENT}.
 
-    //------------->Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
     private void openFileFromFilePicker(Uri uri) {
+
+        if (mDriveServiceHelper != null) {
+
+            mDriveServiceHelper.getPickerFileName(getContentResolver(), uri)
+                    .addOnSuccessListener(nameFile -> {
+
+                        mDriveServiceHelper.getIdForName(nameFile)
+                                .addOnSuccessListener(idFile -> {
+
+                                    if (idFile != null) {
+
+                                        Log.d(TAG, "File opened from picker: " + nameFile);
+                                        Toast.makeText(this, "Abriendo: " + nameFile, Toast.LENGTH_SHORT).show();
+
+                                        readFileId(idFile);
+                                    } else {
+
+                                        Toast.makeText(this, "No se encontro el archivo en MyDrive.", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(exception -> {
+
+                                    Log.e(TAG, "Unable to get id file.", exception);
+                                    Toast.makeText(this, "Unable to get id file.", Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(exception -> {
+
+                        Log.e(TAG, "Unable to open file from picker.", exception);
+                        Toast.makeText(this, "Unable to open file from picker.", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+
+            Log.e(TAG, "mDriveServiceHelper is null.");
+            Toast.makeText(this, "mDriveServiceHelper is null.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //------------->Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
+    /*private void openFileFromFilePicker(Uri uri) {
         if (mDriveServiceHelper != null) {
 
             mDriveServiceHelper.openFileUsingStorageAccessFramework(getContentResolver(), uri)
@@ -293,7 +330,7 @@ public class DriveActivity extends AppCompatActivity {
             Log.e(TAG, "mDriveServiceHelper is null.");
             Toast.makeText(this, "mDriveServiceHelper is null.", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
     //<-------------Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
 
     //------------->create file

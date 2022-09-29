@@ -40,10 +40,7 @@ public class DriveServiceHelper {
         mDriveService = driveService;
     }
 
-    /**
-     * upload file to drive.
-     * @param file
-     */
+    //------------->upload file to drive
     public Task<String> updateFile(java.io.File file) {
         return Tasks.call(mExecutor, () -> {
 
@@ -83,26 +80,9 @@ public class DriveServiceHelper {
             return googleFile.getId();*/
         });
     }
+    //------------->upload file to drive
 
-    /**
-     * Creates a text file in the user's My Drive folder and returns its file ID.
-     */
-    public Task<String> createFile() {
-        return Tasks.call(mExecutor, () -> {
-            File metadata = new File()
-                    .setParents(Collections.singletonList("root"))
-                    .setMimeType("text/plain")
-                    .setName("t11:44.txt");
-
-            File googleFile = mDriveService.files().create(metadata).execute();
-            if (googleFile == null) {
-                throw new IOException("Null result when requesting file creation.");
-            }
-
-            return googleFile.getId();
-        });
-    }
-
+    //------------->Creates a text file in the user's My Drive folder and returns its file ID.
     public Task<String> createFileTxt(String name, String content) {
         return Tasks.call(mExecutor, () -> {
             // Create a File containing any metadata changes.
@@ -120,11 +100,9 @@ public class DriveServiceHelper {
             return googleFile.getId();
         });
     }
+    //<-------------Creates a text file in the user's My Drive folder and returns its file ID.
 
-    /**
-     * Opens the file identified by {@code fileId} and returns a {@link Pair} of its name and
-     * contents.
-     */
+    //------------->Opens the file identified by {@code fileId} and returns a {@link Pair} of its name and contents.
     public Task<Pair<String, String>> readFile(String fileId) {
         return Tasks.call(mExecutor, () -> {
             // Retrieve the metadata as a File object.
@@ -146,38 +124,7 @@ public class DriveServiceHelper {
             }
         });
     }
-
-    /**
-     * Updates the file identified by {@code fileId} with the given {@code name} and {@code
-     * content}.
-     */
-    public Task<Void> saveFilePdf(String fileId, String name, String content) {
-        return Tasks.call(mExecutor, () -> {
-            // Create a File containing any metadata changes.
-            File metadata = new File().setName(name);
-
-            // Convert content to an AbstractInputStreamContent instance.
-            ByteArrayContent contentStream = ByteArrayContent.fromString("application/pdf", content);
-
-            // Update the metadata and contents.
-            mDriveService.files().update(fileId, metadata, contentStream).execute();
-            return null;
-        });
-    }
-
-    public Task<Void> saveFileRtf(String fileId, String name, String content) {
-        return Tasks.call(mExecutor, () -> {
-            // Create a File containing any metadata changes.
-            File metadata = new File().setName(name);
-
-            // Convert content to an AbstractInputStreamContent instance.
-            ByteArrayContent contentStream = ByteArrayContent.fromString("application/rtf", content);
-
-            // Update the metadata and contents.
-            mDriveService.files().update(fileId, metadata, contentStream).execute();
-            return null;
-        });
-    }
+    //<-------------Opens the file identified by {@code fileId} and returns a {@link Pair} of its name and contents.
 
     /**
      * <p>The returned list will only contain files visible to this app, i.e. those which were
@@ -198,9 +145,7 @@ public class DriveServiceHelper {
     }
     //<-------------Returns a {@link FileList} containing all the visible files in the user's My Drive.
 
-    /**
-     * Returns an {@link Intent} for opening the Storage Access Framework file picker.
-     */
+    //------------->Returns an {@link Intent} for opening the Storage Access Framework file picker.
     public Intent createFilePickerIntent() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -208,41 +153,27 @@ public class DriveServiceHelper {
 
         return intent;
     }
+    //<-------------Returns an {@link Intent} for opening the Storage Access Framework file picker.
 
-    /**
-     * Opens the file at the {@code uri} returned by a Storage Access Framework {@link Intent}
-     * created by {@link #createFilePickerIntent()} using the given {@code contentResolver}.
-     */
-    public Task<Pair<String, String>> openFileUsingStorageAccessFramework(
-            ContentResolver contentResolver, Uri uri) {
+    //------------->Opens the file identified by {@code uri} and returns a {@link Pair} of its nameFile
+    public Task<String> getPickerFileName(ContentResolver contentResolver, Uri uri) {
+
         return Tasks.call(mExecutor, () -> {
 
             // Retrieve the document's display name from its metadata.
-            String name;
-            try (Cursor cursor = contentResolver.query(uri, null, null, null, null)) {
+            String nameFile = null;
+            try (Cursor cursor = contentResolver.query(uri, null, null, null, null, null)) {
+
                 if (cursor != null && cursor.moveToFirst()) {
-                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    name = cursor.getString(nameIndex);
-                } else {
-                    throw new IOException("Empty cursor returned for file.");
+
+                    nameFile = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
             }
 
-            // Read the document's contents as a String.
-            String content;
-            try (InputStream is = contentResolver.openInputStream(uri);
-                 BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                content = stringBuilder.toString();
-            }
-
-            return Pair.create(name, content);
+            return nameFile;
         });
     }
+    //<-------------Opens the file identified by {@code uri} and returns a {@link Pair} of its nameFile
 
     //------------->Updates the file identified by {@code fileId} with the given {@code name} and {@code content}.
     public Task<String> saveFileCreateDrive(String mOpenFileId, String fileName, String fileContent) {
@@ -290,6 +221,7 @@ public class DriveServiceHelper {
     }
     //<----------------get the id of the file through its name
 
+    //---------------->delete the file through its id
     public Task<String> deleteFile(String mOpenFileId) {
 
         return Tasks.call(mExecutor, () -> {
@@ -298,23 +230,5 @@ public class DriveServiceHelper {
             return null;
         });
     }
-
-    /**
-     * Updates the file identified by {@code fileId} with the given {@code name} and {@code
-     * content}.
-     */
-    /*public Task<Void> saveFileDrive(String fileId, String name, String content) {
-        return Tasks.call(mExecutor, () -> {
-            // Create a File containing any metadata changes.
-            File metadata = new File().setName(name);
-
-            // Convert content to an AbstractInputStreamContent instance.
-            ByteArrayContent contentStream = ByteArrayContent.fromString("text/plain", content);
-
-            // Update the metadata and contents.
-            mDriveService.files().update(fileId, metadata, contentStream).execute();
-            return null;
-        });
-    }*/
-
+    //<----------------delete the file through its id
 }
