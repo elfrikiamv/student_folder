@@ -4,18 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/carbon"
+    android:orientation="vertical"
+    style="@style/screen"
     tools:context=".NoteActivity">
 
+    <LinearLayout
+        android:id="@+id/lL_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/imgButton"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="22dp"
+            android:background="@drawable/ic_back_btn">
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+        <TextView
+            style="@style/textHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/note">
+        </TextView>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </Space>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lL_mynotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lL_note"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp">
+
+        <TextView
+            style="@style/textHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginBottom="13dp"
+            android:textSize="16dp"
+            android:text="@string/noteDesc">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRVNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/note_rv_item">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/idRVNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/carbon"
-        tools:listitem="@layout/note_rv_item" />
+        tools:listitem="@layout/note_rv_item">
+    </androidx.recyclerview.widget.RecyclerView>-->
+    <com.github.clans.fab.FloatingActionButton
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idFABAddNote"
+        style="@style/buttonFloating"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add">
+    </com.github.clans.fab.FloatingActionButton>
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idFABAddNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +101,6 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/invertidoC"
         android:src="@drawable/ic_add"
-        app:tint="@color/black" />
-
-
+        app:tint="@color/black">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
 </RelativeLayout>
