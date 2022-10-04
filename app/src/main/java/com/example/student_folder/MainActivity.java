@@ -141,9 +141,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager(). popBackStackImmediate();
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
             drawerLayout.closeDrawer(GravityCompat.START);
         }else {
-            super.onBackPressed();
+
+            finishAffinity();
         }
     }
 }

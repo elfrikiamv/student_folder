@@ -35,7 +35,8 @@
     <string name="setDescriptionNote">Presione para escribir en la nota</string>
     <string name="title">Título</string>
 
-
+    <!--MainActivity-->
+    <string name="name">Nombre</string>
 
 
 

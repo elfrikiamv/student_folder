@@ -11,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/barNotiDark</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -86,6 +86,18 @@
     <style name="editText" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColor">@color/white_60</item>
         <item name="android:textColorHint">@color/white_60</item>
+    </style>
+
+    <!--Toolbar-->
+    <style name="toolbar" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/surface02dp</item>
+    </style>
+
+    <!--NavigationView-->
+    <style name="navigationView" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/backgroundDark</item>
+        <item name="itemIconTint">@color/white_87</item>
+        <item name="itemTextColor">@color/white_87</item>
     </style>
 
 </resources>

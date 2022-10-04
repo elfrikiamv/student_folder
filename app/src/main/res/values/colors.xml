@@ -37,11 +37,13 @@
     <color name="surface24dp">#373737</color>
     <color name="floatingButtonBackgroundDark">#6B0C0C0C</color>
 
-    <!--color light-->
+    <color name="barNotiDark">#131313</color>
 
+    <!--color c-->
     <color name="black_87">#DE000000</color>
     <color name="black_60">#99000000</color>
     <color name="black_38">#61000000</color>
+    <color name="barNotilight">#6E1961</color>
     <color name="floatingButtonBackgroundLight">#6B1A1319</color>
 
 </resources>
