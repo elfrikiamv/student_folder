@@ -38,6 +38,11 @@
     <!--MainActivity-->
     <string name="name">Nombre</string>
 
+    <!--InternalFragmen-->
+    <string name="microsoftTeams">Microsoft Teams</string>
+    <string name="googleMeet">Google Meet</string>
+    <string name="zoom">Zoom</string>
+
 
 
     <string name="text">Este es un texto Este es un texto Este es un texto Este es un texto</string>

@@ -101,4 +101,14 @@
         <item name="itemTextColor">@color/black_87</item>
     </style>
 
+    <!--line-->
+    <style name="line" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/black_38</item>
+    </style>
+
+    <!--cardBackgroundColor-->
+    <style name="cardBackgroundColor" parent="Theme.AppCompat.NoActionBar">
+        <item name="cardBackgroundColor">@color/backgroundLight</item>
+    </style>
+
 </resources>
