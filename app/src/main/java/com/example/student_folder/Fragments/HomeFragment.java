@@ -57,7 +57,6 @@ import java.util.List;
 public class HomeFragment extends Fragment implements OnFileSelectedListener {
 
     FloatingActionMenu actionMenu;
-    GoogleSignInClient mGoogleSignInClient;
     private WebView webView;
 
     private RecyclerView recyclerView;
@@ -75,33 +74,10 @@ public class HomeFragment extends Fragment implements OnFileSelectedListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        view = inflater.inflate(R.layout.fragment_home, container, false);
-        //return inflater.inflate(R.layout.fragment_home, container, false);
-        //View view = inflater.inflate(R.layout.fragment_home, container,false);
-
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         //floating menu
         actionMenu = (FloatingActionMenu) view.findViewById(R.id.fabPrincipal);
         actionMenu.setClosedOnTouchOutside(true);
-
-        /*
-        //fondiwis
-        //LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.linear_home);
-        //LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.linear_home);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_home);
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
-
-        animationDrawable.setEnterFadeDuration(2500);
-        animationDrawable.setExitFadeDuration(5000);
-        animationDrawable.start();
-        //fondiwis
-
-         */
 
         linearImage= view.findViewById(R.id.linearImage);
         linearDocs = view.findViewById(R.id.linearDocs);
@@ -142,41 +118,6 @@ public class HomeFragment extends Fragment implements OnFileSelectedListener {
                 getFragmentManager().beginTransaction().add(R.id.fragment_container, catagorizedFragment).addToBackStack(null).commit();
             }
         });
-        /*
-        //byttomDrive
-        //View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        Button btnDriveActivity = (Button) view.findViewById(R.id.btnDrive);
-        btnDriveActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DriveActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btnNoteActivity = (Button) view.findViewById(R.id.btnNote);
-        btnNoteActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NoteActivity.class);
-                startActivity(intent);
-            }
-        });
-
-         */
-        /*
-        Button btnTestActivity = (Button) view.findViewById(R.id.btnTest);
-        btnTestActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TestActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-         */
 
         FloatingActionButton MenuWebTeams = (FloatingActionButton) view.findViewById(R.id.menu_web_teams);
         MenuWebTeams.setOnClickListener(new View.OnClickListener() {
@@ -218,20 +159,6 @@ public class HomeFragment extends Fragment implements OnFileSelectedListener {
         return view;
     }
 
-/*
-    //floating menu
-    public void clicSubMenu1 (View view) {
-        Toast.makeText(getActivity(), "Sub Menu 1 tocado", Toast.LENGTH_SHORT).show();
-        actionMenu.close(true);
-    }
-
-/*
-    public void clicSubMenu2 (View view) {
-        Toast.makeText(getActivity(), "Sub Menu 2 tocado", Toast.LENGTH_SHORT).show();
-        actionMenu.close(true);
-    }
-
-     */
     private void runtimePermission() {
 
         Dexter.withContext(getContext()).withPermissions(

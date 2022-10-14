@@ -28,7 +28,6 @@ class NoteActivity : AppCompatActivity(), NoteClickDeleteInterface, NoteClickInt
         //<-------------backButton
 
         val noteRVAdapter = NoteRVAdapter(this, this, this)
-        //val noteRVAdapter = NoteRVAdapter (this,this,this)
 
         notesRV.adapter = noteRVAdapter
         viewModal = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModal::class.java)

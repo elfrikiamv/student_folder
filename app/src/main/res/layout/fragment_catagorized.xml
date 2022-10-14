@@ -5,8 +5,6 @@
     android:background="@color/carbon"
     android:orientation="vertical">
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_internal"
         android:layout_width="match_parent"

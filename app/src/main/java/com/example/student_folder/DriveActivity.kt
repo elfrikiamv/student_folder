@@ -278,40 +278,6 @@ class DriveActivity : AppCompatActivity() {
         }
     }
 
-    //------------->Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
-    /*private void openFileFromFilePicker(Uri uri) {
-        if (mDriveServiceHelper != null) {
-
-            mDriveServiceHelper.openFileUsingStorageAccessFramework(getContentResolver(), uri)
-                    .addOnSuccessListener(nameAndContent -> {
-                        String name = nameAndContent.first;
-                        String content = nameAndContent.second;
-
-                        nameDriveFileList.setText(name);
-                        textDriveFileList.setText(content);
-                        nameDriveFileList.setEnabled(false);
-
-                        //muiestra el boton de guardar el archivo
-                        saveFileOpenDriveButton.setVisibility(View.VISIBLE);
-                        //muestra el boton de cerrar el archivo
-                        closeFileButton.setVisibility(View.VISIBLE);
-                        //muestra el boton de eliminar el archivo
-                        //deleteFileButton.setVisibility(View.VISIBLE);
-
-                        Log.d(TAG, "Opening " + uri.getLastPathSegment());
-                        Toast.makeText(this, "Abriendo " + uri.getLastPathSegment(), Toast.LENGTH_LONG).show();
-                    })
-                    .addOnFailureListener(exception -> {
-
-                        Log.e(TAG, "Unable to open file from picker.", exception);
-                        Toast.makeText(this, "No se pudo abrir el archivo", Toast.LENGTH_SHORT).show();
-                    });
-        } else {
-
-            Log.e(TAG, "mDriveServiceHelper is null.");
-            Toast.makeText(this, "mDriveServiceHelper is null.", Toast.LENGTH_SHORT).show();
-        }
-    }*/
     //<-------------Opens a file from its {@code uri} returned from the Storage Access Framework file picker initiated by {@link #openFilePicker()}.
     //------------->create file
     private fun createFileTxt() {

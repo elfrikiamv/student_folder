@@ -130,15 +130,6 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
                     handleSignInResult(resultData);
                 }
                 break;
-
-            /*case REQUEST_CODE_OPEN_DOCUMENT:
-                if (resultCode == Activity.RESULT_OK && resultData != null) {
-                    Uri uri = resultData.getData();
-                    if (uri != null) {
-                        openFileFromFilePicker(uri);
-                    }
-                }
-                break;*/
         }
 
         super.onActivityResult(requestCode, resultCode, resultData);
@@ -373,8 +364,6 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
 
                     case "Enviar":
 
-                        //requestSingIn();
-                        //uploadPdfFile();
                         String fileName = file.getName();
                         Intent share = new Intent();
                         share.setAction(Intent.ACTION_SEND);
@@ -383,201 +372,11 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
                         //share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
                         startActivity(Intent.createChooser(share, "Enviar: " + fileName));
                         break;
-
-                       /*
-                        String filePath = file.getPath();
-                        Drive mDriveService;
-
-
-                        com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
-                        fileMetadata.setName("Amv.pdf");
-                        java.io.File file = new java.io.File(filePath);
-                        FileContent mediaContent = new FileContent("application/pdf", file);
-                        com.google.api.services.drive.model.File myFile = null;
-                        try {
-                            myFile = mDriveService.files().create(fileMetadata, mediaContent)
-                                    .setFields("id")
-                                    .execute();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        //System.out.println("File ID: " + file.getId());
-                        if (myFile == null){
-                            throw new IOException("No se pudo crear tu archivo ):");
-
-                        }
-                        return myFile.getId();
-                        //---------------------------------------------
-                       driveServiceHelper.createFilePDF(filePath).addOnSuccessListener(new OnSuccessListener<String>() {
-
-                            @Override
-                            public void onSuccess(@NonNull String s) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getContext(),"Si se pudo!!",Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(),"No se conecto a Drive :#",Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
-                            break;
-
-                        /*private void saveFileToDrive() {
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    // File's binary content
-                                    java.io.File fileContent = new java.io.File(fileUri.getPath());
-                                    FileContent mediaContent = new FileContent("image/jpeg", fileContent);
-
-                                    // File's metadata.
-                                    File body = new File();
-                                    body.setTitle(fileContent.getName());
-                                    body.setMimeType("image/jpeg");
-
-                                    File file = service.files().insert(body, mediaContent).execute();
-                                    if (file != null) {
-                                        showToast("Photo uploaded: " + file.getTitle());
-                                        startCameraIntent();
-                                    }
-                                } catch (UserRecoverableAuthIOException e) {
-                                    startActivityForResult(e.getIntent(), REQUEST_AUTHORIZATION);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        t.start();
-                    }
-
-                        File fileMetadata = new File();
-                        fileMetadata.setName(file.getName());
-                        java.io.File filePath = new java.io.File(file.getPath());
-                        FileContent mediaContent = new FileContent("application/pdf", filePath);
-                        File file = driveService.files().create(fileMetadata, mediaContent).execute();
-                        break;
-
-                    /*case "Share":
-                        String fileName = file.getName();
-                        Intent share = new Intent();
-                        share.setAction(Intent.ACTION_SEND);
-                        share.setType("image/jpeg");
-                        share.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".provider", file));
-                        //share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                        startActivity(Intent.createChooser(share, "Respaldar " + fileName));
-                        break;*/
                 }
             }
         });
 
     }
-
-
-
-    /*
-    private void requestSingIn() {
-        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestScopes(new Scope(DriveScopes.DRIVE_FILE))
-                .build();
-
-        //GoogleSignInClient client = GoogleSignIn.getClient(this, signInOptions);
-        GoogleSignInClient client = GoogleSignIn.getClient(getActivity(),signInOptions);
-        startActivityForResult(client.getSignInIntent(), 400);
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode)
-        {
-            case 400:
-                if(resultCode == RESULT_OK)
-                {
-                    handleSignInIntent(data);
-                }
-                break;
-        }
-    }
-
-    private void handleSignInIntent(Intent data) {
-        GoogleSignIn.getSignedInAccountFromIntent(data)
-                .addOnSuccessListener(new OnSuccessListener<GoogleSignInAccount>() {
-                    @Override
-                    public void onSuccess(@NonNull GoogleSignInAccount googleSignInAccount) {
-                        GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(getActivity(), Collections.singleton(DriveScopes.DRIVE_FILE));
-
-                        credential.setSelectedAccount(googleSignInAccount.getAccount());
-                        Drive googleDriveService = new Drive.Builder(
-                                AndroidHttp.newCompatibleTransport(),
-                                new GsonFactory(),
-                                credential)
-                                .setApplicationName("Respaldo Drive")
-                                .build();
-                        driveServiceHelper = new DriveServiceHelper(googleDriveService);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
-    private void uploadPdfFile() {
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle ("Estamos subiendo tu archivo a Drive :D");
-        progressDialog.setMessage("Espera un poco!");
-        progressDialog.show();
-
-        String filePath = "/sdcard/-mexico-reglamento-de-insumos-para-la-salud-es.pdf";
-
-        driveServiceHelper.createFilePDF(filePath).addOnSuccessListener(new OnSuccessListener<String>() {
-            @Override
-            public void onSuccess(@NonNull String s) {
-                progressDialog.dismiss();
-                Toast.makeText (getContext(),"Si se pudo!!",Toast.LENGTH_SHORT).show();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(),"No se conecto a Drive :#",Toast.LENGTH_LONG).show();
-
-                    }
-                });
-    }
-    /*public void uploadPdfFile (View v){
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle ("Estamos subiendo tu archivo a Drive :D");
-        progressDialog.setMessage("Espera un poco!");
-        progressDialog.show();
-        String filePath = "/sdcard/-mexico-reglamento-de-insumos-para-la-salud-es.pdf";
-
-        driveServiceHelper.createFilePDF(filePath).addOnSuccessListener(new OnSuccessListener<String>() {
-            @Override
-            public void onSuccess(@NonNull String s) {
-                progressDialog.dismiss();
-                Toast.makeText (getContext(),"Si se pudo!!",Toast.LENGTH_SHORT).show();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(),"No se conecto a Drive :#",Toast.LENGTH_LONG).show();
-
-                    }
-                });
-    }
-    */
 
     class CustomAdapter extends BaseAdapter {
 

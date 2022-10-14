@@ -34,15 +34,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //<-------------Cuenta google
     ImageView imageView;
     TextView name, email;
-    //Button signout;
-    //Cuenta google
-    //menu flotanter¿
-    //FloatingActionMenu actionMenu;
 
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -73,14 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View headerPhoto = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) headerPhoto.findViewById(R.id.cuenta_avatar);
-        //name.setText("Your Text Here");
 
-        //imageView = findViewById (R.id.user_foto);
-        //name = (TextView)findViewById(R.id.cuenta_name);
-        //name = (TextView)findViewById(R.id.cuenta_name);
-        //name = findViewById(R.id.cuenta_name);
-        //email = findViewById (R.id.textEmail);
-        //id = findViewById (R.id.textID);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -89,17 +79,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Uri personPhoto = acct.getPhotoUrl();
 
             name.setText (personName);
-            //email.setText (personEmail);
-            //id.setText (personId);
+
             Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Toast.makeText( MainActivity.this, "Mi Correo: " +"\n"+ personEmail + "\n" +
                             "Mi Id: "+"\n"+ personId, Toast.LENGTH_LONG).show();
-                    //Toast.makeText( MainActivity.this, "Inicio con la cuenta de: "+personEmail, Toast.LENGTH_LONG).show();
-                    //signIn();
                 }
             });
         }
@@ -108,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+
                 case R.id.nav_home:
                     HomeFragment homeFragment = new HomeFragment();
                     getSupportFragmentManager (). beginTransaction().replace (R.id.fragment_container, homeFragment).addToBackStack(null).commit();
@@ -146,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else {
             
             super.onBackPressed();
-            //finishAffinity();
         }
     }
 }

@@ -68,14 +68,6 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
-    <!--<androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/idRVNotes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/carbon"
-        tools:listitem="@layout/note_rv_item">
-    </androidx.recyclerview.widget.RecyclerView>-->
     <com.github.clans.fab.FloatingActionButton
 
         android:id="@+id/idFABAddNote"
@@ -87,20 +79,4 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add">
     </com.github.clans.fab.FloatingActionButton>
-
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/idFABAddNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/invertidoC"
-        android:src="@drawable/ic_add"
-        app:tint="@color/black">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
 </RelativeLayout>
