@@ -1,79 +1,51 @@
-<a name="readme-top"></a>
+<p align="center">
+  <img height="92" alt="elfrikiamv-logo" src="https://elfrikiamv.com/media/img/logo-elfrikiamv-dev-light-en-horizontal.webp">
+</p>
 
-<!-- PROJECT SHIELDS -->
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<img align="right" width="342" height="1200" alt="purple waves" src="https://elfrikiamv.com/media/img/bg-purple-wave.webp"/>
 
-<!-- PROJECT LOGO -->
-<br />
-  <h3 align="center">student_folder</h3>
-
-  <p align="center">
-    Organiza tus archivos.
-    <br />
-    <a href="https://github.com/elfrikiamv/student_folder/"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="elfrikiamv.me/student-folder/">View Demo</a>
+<p align="start">
+  <img height="128" alt="logo-student-folder" src="https://elfrikiamv.com/media/img/logo-student-folder.webp"/>
+  
+</p>
+<a href="http://elfrikiamv.com/student-folder/">View Demo</a>
     ·
-    <a href="https://github.com/elfrikiamv/student_folder/issues/">Report Bug</a>
-  </p>
-</div>
+<a href="https://github.com/elfrikiamv/student_folder/issues/">Report Bug</a>
+<div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
+## Student_folder.
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+Student_folder is a mobile application for Android 10 devices that provides students with an efficient solution for managing and backing up their files to the cloud. With student_folder, students can easily organize and store their important documents, ensuring easy access and peace of mind.
 
-Hola, soy una aplicación móvil que permite gestionar y respaldar archivos en la nube for android 10.
+## Built With.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- Firebase.
+- Google Api Services Drive.
+- Room.
+- Lifecycle.
+- Coroutines.
+- Androidx.
+- Kotlin.
+- Java.
+- MVVM and MVC.
+- XML.
 
-### Built With
+### Other libraries:
 
-Tecnologías utilizadas.
+- Neumorphism.
+- Clans fab.
 
-* [Kotlin]
-* [Java]
-* [APIGoogleDrive]
+## Designing.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- **_[Figma](https://www.figma.com/file/5KXPNiBtSTAFFUDXVLLOAv/student_folder?type=design&node-id=0-1&mode=design)_**.
 
-<!-- LICENSE -->
-## License
+## License.
 
 Distributed under the GNU General Public License v3.0
 See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Contact.
 
-<!-- CONTACT -->
-## Contact
-
-[Linkedin][linkedin-url] - contacto@elfrikiamv.me
-
-Project Link: [https://github.com/elfrikiamv/student_folder](https://github.com/elfrikiamv/student_folder)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Kotlin]: https://kotlinlang.org/
-[Java]: https://www.oracle.com/java/
-[APIGoogleDrive]: https://developers.google.com/drive/
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/daniel-gonz%C3%A1lez-485082212/
-
-
+- Linkedin - **_[@elfrikiamv](https://www.linkedin.com/in/elfrikiamv/)_**.
+- Email - **_contact@elfrikiamv.com_**.
+- My website - **_[elfrikiamv.com](https://elfrikiamv.com)_**.
