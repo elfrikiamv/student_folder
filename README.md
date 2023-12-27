@@ -2,7 +2,7 @@
   <img height="92" alt="elfrikiamv-logo" src="https://elfrikiamv.com/media/img/logo-elfrikiamv-dev-light-en-horizontal.webp">
 </p>
 
-<img align="right" width="342" height="1200" alt="purple waves" src="https://elfrikiamv.com/media/img/bg-purple-wave.webp"/>
+<img align="right" width="342" height="1222" alt="purple waves" src="https://elfrikiamv.com/media/img/bg-purple-wave.webp"/>
 
 <p align="start">
   <img height="128" alt="logo-student-folder" src="https://elfrikiamv.com/media/img/logo-student-folder.webp"/>
